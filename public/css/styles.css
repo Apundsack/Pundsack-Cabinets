@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #3498db; /* Set your primary color here */
+    --primary-color-light: #5dade2;
+    --primary-color-dark: #2e86c1;
+    --text-color: #333333;
+    --background-color: #ffffff;
+  }
+  
+  body {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    font-family: Arial, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--primary-color-dark);
+  }
+  
+  button {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: var(--primary-color-dark);
+  }
+  
