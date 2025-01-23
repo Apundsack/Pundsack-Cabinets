@@ -15,6 +15,12 @@ app.get('/', (req, res) => {
     const footer = fs.readFileSync(path.join(serverRootDirectory, 'public/html/footer.html'), 'utf8');
     const content = fs.readFileSync(path.join(serverRootDirectory, 'public/html/content.html'), 'utf8');
 
+    // Log the contents to ensure they are being read correctly
+    console.log('Header Content:', header);
+    console.log('Nav Content:', nav);
+    console.log('Content Content:', content);
+    console.log('Footer Content:', footer);
+
     // Assemble the full HTML
     const fullPage = `
       <!DOCTYPE html>
