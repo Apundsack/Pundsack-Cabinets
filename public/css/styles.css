@@ -13,14 +13,14 @@
     font-family: Arial, sans-serif;
   }
 
-  content {
+  .content {
     margin:auto;
     width: 80%;
     height: 100vh;
     background-color: var(--white);
   }
 
-  nav {
+  .nav {
     width: 75%;
     margin: 0 0 0 auto;
     background-color: var(--dark);
