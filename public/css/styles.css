@@ -41,14 +41,28 @@
     }
 
     .nav {
-      width: 75%;
       margin: 0 0 0 auto;
       background-color: var(--dark);
       padding: 20px;
-      color:#ffffff;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
     }
     
     .nav > p{
       color:#ffffff;
+      padding: 10px;
+      text-align: center;
     }
+
+    .nav p:before{
+      z-index: -1;
+      position: absolute;
+      content: '';
+      margin-left: -50px;
+      height: 100%;
+      width: 50px;
+      background-color: red;
+      transform: rotate(-45deg);
+    }
+  
     
