@@ -10,7 +10,7 @@ function getPhotos(dir, fileList = []) {
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
       getPhotos(filePath, fileList);
-    } else if (/\.(jpg|jpeg|png|gif)$/.test(file)) {
+    } else if (/\.(jpg|jpeg|png|gif)$/i.test(file)) {
       fileList.push(filePath.replace(path.join(__dirname, '../public'), ''));
     }
   });
@@ -18,7 +18,7 @@ function getPhotos(dir, fileList = []) {
 }
 
 router.get('/gallery', (req, res) => {
-  const photosDir = path.join(__dirname, '../public/photos');
+  const photosDir = path.join(__dirname, '../public/images/photos');
   const photos = getPhotos(photosDir);
   res.render('gallery', { photos });
 });

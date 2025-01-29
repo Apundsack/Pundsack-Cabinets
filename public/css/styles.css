@@ -49,11 +49,15 @@
     }
     
     .nav > p{
-      color:#ffffff;
       padding: 10px;
       text-align: center;
       margin: 15px;
       background-color: var(--dark);
+    }
+
+    .nav > p > a{
+      color:#ffffff;
+      text-decoration: none;
     }
 
     .nav p:before{
