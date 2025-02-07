@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= photo.url %></title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .image-page {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        padding-top: 7vh;
+        min-height: 100vh; /* Ensure full viewport height */
+    }
+    .image-container {
+        max-width: 90%; /* Limit image width */
+        max-height: 90vh; /* Limit image height */
+    }
+    .image-container img {
+        max-width: 100%;
+        max-height: 70vh;
+        display: block;
+    }
+</style>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <h1>Image Details</h1>
+    <div class="content">
+        <div class="image-page">
+            <div class="image-container">
+                <img src="<%= photo.url %>" alt="<%= photo.url %>">
+            </div>
+        </div>
+    </div>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>
