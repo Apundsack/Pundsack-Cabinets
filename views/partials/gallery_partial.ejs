@@ -1,13 +1,10 @@
 <div class="gallery">
-  <% if (locals.photos && locals.photos.length > 0) { %>
-    <% locals.photos.forEach(photo => { %>
-        <div class="gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>">
-            <a href="<%= photo.link %>">
-                <img src="<%= photo.url %>" alt="<%= photo.url %>">
-            </a>
-        </div>
-    <% }) %>
-  <% } else { %>
-      <p>No photos available.</p>
-  <% } %>
+  <% photos.forEach(photo => { %>
+    <div class="gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>">
+        <a href="/gallery/<%= path.basename(photo.url) %>">
+            <img src="<%= photo.url %>" alt="<%= photo.url %>">
+        </a>          
+    </div>
+<% }) %>
+
 </div>

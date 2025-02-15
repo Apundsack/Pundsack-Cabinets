@@ -21,7 +21,12 @@
         max-height: 70vh;
         display: block;
     }
-</style>
+    .metadata {
+        margin-top: 20px;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
   <%- include('partials/header') %>
@@ -32,7 +37,14 @@
             <div class="image-container">
                 <img src="<%= photo.url %>" alt="<%= photo.url %>">
             </div>
+            <div class="metadata">
+            <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
+            <p><strong>Camera:</strong> <%= metadata.camera %></p>
+          </div>
         </div>
+
+
+      
     </div>
   </main>
   <%- include('partials/footer') %>

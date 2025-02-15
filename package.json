@@ -11,6 +11,8 @@
   "description": "",
   "dependencies": {
     "ejs": "^3.1.10",
+    "exif-parser": "^0.1.12",
+    "exifreader": "^4.26.1",
     "express": "^4.21.2",
     "image-size": "^1.2.0"
   }

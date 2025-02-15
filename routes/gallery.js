@@ -2,93 +2,94 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const sizeOf = require('image-size');
+const exifreader = require('exifreader');  // Import the exifreader for metadata extraction
 const router = express.Router();
 
-
+// Function to get all photos with dimensions
 async function getAllPhotosWithDimensions(dir) {
   const files = fs.readdirSync(dir);
   const photosWithDimensions = [];
 
-  console.log("Processing directory:", dir); // Log the current directory
-
   for (const file of files) {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
 
-      console.log("Checking file/dir:", filePath); // Log each file/dir
-
-      if (stat.isDirectory()) {
-          console.log("Found subdirectory:", filePath);
-          const subDirPhotos = await getAllPhotosWithDimensions(filePath); // Recursively process subdirectories
-          photosWithDimensions.push(...subDirPhotos); // Add photos from subdirectory
-      } else if (/\.(jpg|jpeg|png|gif)$/i.test(file)) {  // Check for image files
-          console.log("Found image file:", filePath);
-          try {
-              const dimensions = sizeOf(filePath);  // Get image dimensions
-              console.log("Dimensions for", filePath, ":", dimensions);
-
-              // Create the relative path for the image file to serve in the gallery
-              const relativePath = filePath.replace(path.join(__dirname, '../public'), '');
-
-              photosWithDimensions.push({
-                  url: relativePath,
-                  width: dimensions.width,
-                  height: dimensions.height
-              });
-          } catch (err) {
-              console.error(`Error getting dimensions for ${filePath}:`, err);
-              const relativePath = filePath.replace(path.join(__dirname, '../public'), '');
-              photosWithDimensions.push({ url: relativePath, width: 100, height: 100 }); // Fallback dimensions
-          }
+    if (stat.isDirectory()) {
+      // If it's a directory, recursively fetch photos from subdirectories
+      const subDirPhotos = await getAllPhotosWithDimensions(filePath);
+      photosWithDimensions.push(...subDirPhotos);
+    } else if (/\.(jpg|jpeg|png|gif)$/i.test(file)) {
+      // If it's an image file, fetch its dimensions
+      try {
+        const dimensions = sizeOf(filePath);
+        const relativePath = filePath.replace(path.join(__dirname, '../public'), '');
+        photosWithDimensions.push({
+          url: relativePath,
+          width: dimensions.width,
+          height: dimensions.height
+        });
+      } catch (err) {
+        console.error(`Error getting dimensions for ${filePath}:`, err);
+        const relativePath = filePath.replace(path.join(__dirname, '../public'), '');
+        photosWithDimensions.push({ url: relativePath, width: 100, height: 100 });
       }
+    }
   }
-  return photosWithDimensions;  // Return all the gathered photos with dimensions
+
+  return photosWithDimensions;
 }
 
-
-// 2. Route for the main gallery page
+// Route for the gallery page
 router.get('/gallery', async (req, res) => {
-  const photosDir = path.join(__dirname, '../public/images/photos'); // The root directory of images
+  const photosDir = path.join(__dirname, '../public/images/photos');
   try {
-      const photos = await getAllPhotosWithDimensions(photosDir);
-      
-      if (photos.length === 0) {
-          return res.status(404).send('No photos found.');
-      }
+    const photos = await getAllPhotosWithDimensions(photosDir);
+    if (photos.length === 0) {
+      return res.status(404).send('No photos found.');
+    }
 
-      const photosWithLinks = photos.map(photo => {
-          return {
-              ...photo,
-              link: `/gallery/${path.basename(photo.url)}` // Link to the individual photo detail page
-          };
-      });
-
-      res.render('gallery', { photos: photosWithLinks }); // Render the gallery page with photos and links
+    const photosWithLinks = photos.map(photo => ({
+      ...photo,
+      link: `/gallery/${path.basename(photo.url)}`,
+    }));
+    
+    // Pass the path module to the template
+    res.render('gallery', { photos: photosWithLinks, path: path });
   } catch (err) {
-      console.error('Error fetching photos:', err);
-      res.status(500).send('Error fetching photos');
+    console.error('Error fetching photos:', err);
+    res.status(500).send('Error fetching photos');
   }
 });
 
 
-// 3. Route for individual image pages (PDP)
+// Route for individual image pages (with metadata)
 router.get('/gallery/:imageName', async (req, res) => {
-    const imageName = req.params.imageName; // Get the image name from the URL
-    const photosDir = path.join(__dirname, '../public/images/photos');
+  const imageName = decodeURIComponent(req.params.imageName);  // Decode URL-encoded image name
+  const photosDir = path.join(__dirname, '../public/images/photos');
 
-    try {
-        const allPhotos = await getAllPhotosWithDimensions(photosDir);
-        const photo = allPhotos.find(p => path.basename(p.url) === imageName);
+  try {
+      const allPhotos = await getAllPhotosWithDimensions(photosDir);
+      const photo = allPhotos.find(p => path.basename(p.url) === imageName);  // Match by file name
 
-        if (!photo) {
-            return res.status(404).send('Image not found'); // Handle image not found
-        }
-        res.render('image', { photo: photo }); // Render the individual image page
-    } catch (err) {
-        console.error("Error in /gallery/:imageName route:", err);
-        res.status(500).send("Error loading image");
-    }
+      if (!photo) {
+          return res.status(404).send('Image not found');
+      }
+
+      const imagePath = path.join(__dirname, '../public', photo.url);
+      const imageBuffer = fs.readFileSync(imagePath);
+      const tags = exifreader.load(imageBuffer);
+
+      const metadata = {
+          date: tags['DateTime'] ? tags['DateTime'].description : 'Unknown',
+          camera: tags['Model'] ? tags['Model'].description : 'Unknown',
+          orientation: tags['Orientation'] ? tags['Orientation'].description : 'Unknown'
+      };
+
+      res.render('image', { photo: photo, metadata: metadata });
+  } catch (err) {
+      console.error("Error in /gallery/:imageName route:", err);
+      res.status(500).send("Error loading image");
+  }
 });
-
 
 module.exports = router;
