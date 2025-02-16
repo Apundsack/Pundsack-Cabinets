@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const galleryRoutes = require('./routes/gallery'); // Import gallery routes
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 443;
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
