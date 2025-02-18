@@ -6,10 +6,8 @@
   <title>Pundsack Cabinets</title>
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    body{
+    .hero{
       background-image: url(/images/imagery/DSC_0082.JPG);
-      background-size: 100%;
-      background-repeat: no-repeat;
     }
     .content{
       margin-top: 15%;
@@ -17,11 +15,20 @@
 
   </style>
 </head>
-<%- include('partials/header') %>
+
 <body>
-  <main>
-    <h1>Home</h1>
+  <div class="hero">
+    <%- include('partials/header') %>
+  <main>      
+    <div class="highlight">
+        <h1>Home</h1>
+      </div>
+    <div class="content">
+
+    </div>
   </main>
+  <%- include('partials/footer') %>
+</div>
 </body>
-<%- include('partials/footer') %>
+
 </html>

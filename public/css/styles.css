@@ -6,30 +6,34 @@
   }
 
   :root {
+      --h1: #000000;
       --dark: #222222;
       --yellow: #D7B418;
       --red: #9D2719;
       --text-color: #222222;
       --background-color: #EDEDED;
+      --grey: #D7DAE5;
       --white: #ffffff;
     }
     
     body {
-      width: 100%;
+      width: auto;
       color: var(--text-color);
       background-color: var(--background-color);
       font-family: Futura, sans-serif;
-      margin: 0;
       overflow-x: hidden;
+      margin:0;
+      opacity: 0;
+      animation: fadeIn 1s forwards; /* Apply fadeIn animation */
     }
 
     h1 {
+      display: inline;
       font-family: Futura XBlk BT, sans-serif;
-      font-size: 2.5rem;
-      color: var(--dark);
-      background-color: var(--background-color);
-      padding: 0.68em;
-      margin: 0;
+      font-size: clamp(1.5rem, 5vw, 3rem);      
+      width: auto;
+      color: var(--h1);
+      mix-blend-mode: multiply;
     }
 
     p {
@@ -40,17 +44,21 @@
 
     .content {
       margin:auto;
-      padding-top:10px;
+      padding-top:20px;
       width: 100%;
       height: auto;
       min-height: 70vh;
       background-color: var(--white);
+      border-radius: 25px;
+      margin-top: 5%;
     }
 
     .nav {
       background-color: var(--dark);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      border-radius: 25px;
+      margin: 8px;
     }
     
     .nav > p{
@@ -121,13 +129,74 @@
 }
 
 footer {
-  background-color: var(--background-color);
-  width: 100%;
+  background-color: var(--grey);
+  width: auto;
   position: relative;
-  padding: 40px;
+  height: 100px;
+  padding: 0px 0 0 25px;
+  border-radius: 25px 25px 0 0;
 }
 
+/* Create the fadeIn effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    background-color: var(--background-color);
+  }
+  100% {
+    opacity: 1;
+    background-color: var(--background-color);
+  }
+}
 
-main {
-  min-height: 100vh;
+/* Create the fadeIn effect */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    background-color: var(--background-color);
+  }
+  100% {
+    opacity: 0;
+    background-color: var(--background-color);
+  }
+}
+
+/* Apply the fade-out animation when the user navigates away */
+body.fade-out {
+  animation: fadeOut 0.25s forwards; /* Fade-out effect */
+}
+
+.hero{
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 8px 8px 0 8px;
+}
+
+.highlight {
+  height: 100%;
+  width: 40%;
+  background-color: #FF4000;
+  background-image: url(/images/imagery/PaperTexture.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-blend-mode: multiply;
+  opacity: 0.99;
+  padding: 20px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.highlight::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(/images/imagery/PaperTexture.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.35;
+  border-radius: 15px;
 }

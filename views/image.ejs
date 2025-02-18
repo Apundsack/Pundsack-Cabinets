@@ -19,9 +19,10 @@
         max-width: 100%;
         max-height: 70vh;
         display: block;
+        border-radius: 15px;
     }
     .metadata {
-        padding: 20px 0 0 20px;
+        padding: 0 0 0 20px;
         font-size: 1.1rem;
         line-height: 1.6;
     }
@@ -30,19 +31,26 @@
 <body>
   <%- include('partials/header') %>
   <main>
+    <div class="highlight">
     <h1>Image Details</h1>
+    </div>
     <div class="content">
-      <div class="metadata">
-        <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
-      </div>
-        <div class="image-page">
-            <div class="image-container">
-                <img src="<%= photo.url %>" alt="<%= photo.url %>">
-            </div>
+      <table style="margin:auto;">
+        <tr>
+        <td>
+          <div class="image-page">
+              <div class="image-container">
+                  <img src="<%= photo.url %>" alt="<%= photo.url %>">
+              </div>
+          </div>
+        </td>
+        <td>
+        <div class="metadata">
+          <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
         </div>
-
-
-      
+      </td>
+    </tr>
+      </table>
     </div>
   </main>
   <%- include('partials/footer') %>
