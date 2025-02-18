@@ -5,5 +5,23 @@
       <p><a href="/gallery">Gallery</a></p>
       <p><a href="/contact">Contact Us</a></p>
     </nav>
+
+    <script>
+      // Get the current page path (e.g., "/gallery", "/home", etc.)
+      const pagePath = window.location.pathname;
+
+      // Save the scroll position when the user scrolls
+      window.addEventListener('scroll', () => {
+          sessionStorage.setItem(`scrollPosition_${pagePath}`, window.scrollY);
+      });
+
+      // Retrieve and apply the scroll position on page load
+      window.addEventListener('load', () => {
+          const savedScrollPosition = sessionStorage.getItem(`scrollPosition_${pagePath}`);
+          if (savedScrollPosition) {
+              window.scrollTo(0, savedScrollPosition);
+          }
+      });
+  </script>
 </header>
   
