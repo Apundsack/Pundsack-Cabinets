@@ -8,13 +8,10 @@
 </head>
 <body>
   <%- include('partials/header') %>
-  <main>
     <h1>Gallery</h1>
     <div class="content">
-      <p>Explore our image collection.</p>
       <%- include('partials/gallery_partial', { photos: photos }) %>
     </div>
-  </main>
   <%- include('partials/footer') %>
 </body>
 </html>
