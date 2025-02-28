@@ -18,7 +18,7 @@ async function getAllPhotosWithDimensions(dir) {
       // If it's a directory, recursively fetch photos from subdirectories
       const subDirPhotos = await getAllPhotosWithDimensions(filePath);
       photosWithDimensions.push(...subDirPhotos);
-    } else if (/\.(jpg|jpeg|png|gif)$/i.test(file)) {
+    } else if (/\.(jpg|jpeg|png|gif|avif)$/i.test(file)) {
       // If it's an image file, fetch its dimensions
       try {
         const dimensions = sizeOf(filePath);
