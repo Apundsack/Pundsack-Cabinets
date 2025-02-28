@@ -1,19 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us</title>
-  <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <%- include('partials/header') %>
-  <div class="highlight">
-    <h1>Contact Us</h1>
-  </div>
-    <div class="content">
-      <p>Get in touch with us.</p>
+    <%- include('partials/header') %>
+    <div class="highlight">
+        <h1>Contact Us</h1>
     </div>
-  <%- include('partials/footer') %>
+    <div class="content">
+        <p>Get in touch with us.</p>
+        <form id="contactForm" action="/contact" method="POST">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
+            <input type="hidden" name="honeypot" style="display:none;">
+            <input type="hidden" id="recaptchaResponse" name="g-recaptcha-response">
+            <input type="submit" value="Submit">
+        </form>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3"></script>
+        <script>
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3', { action: 'submit' }).then(function(token) {
+                        document.getElementById('recaptchaResponse').value = token;
+                        document.getElementById('contactForm').submit();
+                    });
+                });
+            });
+        </script>
+    </div>
+    <%- include('partials/footer') %>
 </body>
 </html>
