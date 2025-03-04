@@ -45,6 +45,7 @@
     .content {
       margin:auto;
       padding-top:20px;
+      padding-bottom: 20px;
       width: 100%;
       height: auto;
       min-height: 70vh;
@@ -92,10 +93,6 @@
       .gallery {
           grid-template-columns: repeat(4, 1fr); /* 5 columns on desktop */
       }
-  }
-  
-  .gallery-item {
-      overflow: hidden; /* Prevents image overflow */
   }
   
   .portrait {
