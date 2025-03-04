@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin: 5px 0;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <%- include('partials/header') %>
@@ -12,7 +50,9 @@
         <h1>Contact Us</h1>
     </div>
     <div class="content">
-        <p>Get in touch with us.</p>
+        <div style="margin: auto;width: 300px;text-align: center;">
+            <h2>Contact Form</h2>
+            <p>Please fill out the form below to contact us.</p>
         <form id="contactForm" action="/contact" method="POST">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
@@ -27,6 +67,7 @@
             <input type="hidden" id="recaptchaResponse" name="g-recaptcha-response">
             <input type="submit" value="Submit">
         </form>
+      </div>
         <script src="https://www.google.com/recaptcha/api.js?render=6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3"></script>
         <script>
             document.getElementById('contactForm').addEventListener('submit', function(event) {
