@@ -5,6 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery</title>
   <link rel="stylesheet" href="/css/styles.css">
+
+<style>
+  .landscape, .portrait {
+    position: relative;
+  }
+
+  .heart-icon {
+    text-align: center;
+    font-size: 20px;
+    color: #222222;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    padding-bottom: 15px;
+  }
+
+  .heart-icon.filled {
+    color: red;
+    transform: translateY(-15px);
+  }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="/css/styles.css">
+
+<style>
+  .landscape, .portrait {
+    position: relative;
+  }
+
+  .heart-icon {
+    text-align: center;
+    font-size: 20px;
+    color: #222222;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    padding-bottom: 15px;
+  }
+
+  .heart-icon.filled {
+    color: red;
+    transform: translateY(-15px);
+  }
+</style>
+
+<script>
+  // Function to toggle heart icon state
+  function toggleHeart(element) {
+    const id = element.dataset.id;
+    element.classList.toggle('filled');
+
+    // Get the current state of all hearts from localStorage
+    let heartStates = JSON.parse(localStorage.getItem('heartStates')) || {};
+
+    // Toggle the heart state for the specific photo
+    heartStates[id] = element.classList.contains('filled');
+
+    // Save the updated states to localStorage
+    localStorage.setItem('heartStates', JSON.stringify(heartStates));
+  }
+
+  // Function to load the heart states from localStorage
+  function loadHeartStates() {
+    let heartStates = JSON.parse(localStorage.getItem('heartStates')) || {};
+
+    // Loop through all the heart icons and set their state based on localStorage
+    document.querySelectorAll('.heart-icon').forEach((icon) => {
+      const id = icon.dataset.id; // Assuming each heart icon has a unique 'data-id' attribute
+      if (heartStates[id]) {
+        icon.classList.add('filled');
+      } else {
+        icon.classList.remove('filled');
+      }
+    });
+  }
+
+  // Load heart states when the page loads
+  window.onload = loadHeartStates;
+</script>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <div class="highlight">
+    <h1>Gallery</h1>
+  </div>
+    <div class="content" style="min-height: 400vh;">
+      <%- include('partials/gallery_partial', { photos: photos }) %>
+    </div>
+  <%- include('partials/footer') %>
+</body>
+</html>
+
 </head>
 <body>
   <%- include('partials/header') %>

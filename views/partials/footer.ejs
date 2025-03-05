@@ -1,3 +1,33 @@
+<style>
+    
+    footer {
+  background-color: var(--white);
+  width: auto;
+  position: relative;
+  height: 100px;
+  padding: 0px 0 0 25px;
+  border-radius: 0px 25px 0 0;
+  margin:0 15px 0 -1px;
+  z-index: 100; /* Ensure the footer is on top */
+}
+
+footer:before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  background: transparent;
+  border-bottom-left-radius: 50%;
+  box-shadow: 0 20px 0 0 var(--white);
+  z-index: -1; /* This places the pseudo-element behind the footer */
+}
+
+
+</style>
+
+
 <div id="transition-overlay"></div>
 <footer>
     <p>Pundsack Cabinets LLC</p>
