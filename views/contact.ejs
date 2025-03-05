@@ -43,6 +43,20 @@
             text-align: center;
         }
     </style>
+    <script>
+        // Function to load heart states from localStorage and update the hidden input field
+        function loadToggledHeartIds() {
+          // Get the toggled heart IDs from localStorage
+          const toggledHeartIds = JSON.parse(localStorage.getItem('toggledHeartIds')) || [];
+      
+          // Set the hidden input field with the toggled heart IDs (comma-separated)
+          document.getElementById('toggledHeartIds').value = toggledHeartIds.join(',');
+        }
+      
+        // Call the function when the page loads
+        window.onload = loadToggledHeartIds;
+      </script>
+      
 </head>
 <body>
     <%- include('partials/header') %>
@@ -62,6 +76,7 @@
 
             <label for="message">Message:</label><br>
             <textarea id="message" name="message" rows="4" required></textarea><br><br>
+
             <input type="hidden" id="toggledHeartIds" name="toggledHeartIds">
             <input type="hidden" name="honeypot" style="display:none;">
             <input type="hidden" id="recaptchaResponse" name="g-recaptcha-response">
@@ -71,23 +86,17 @@
       </div>
         <script src="https://www.google.com/recaptcha/api.js?render=6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3"></script>
         <script>
-            document.getElementById('contactForm').addEventListener('submit', function(event) {
-                // Get the toggled heart IDs from localStorage
-                const toggledHeartIds = JSON.parse(localStorage.getItem('toggledHearts')) || [];
-                document.getElementById('toggledHeartIds').value = toggledHeartIds.join(',');
-        
-                // Get the reCAPTCHA token
-                event.preventDefault();
-                grecaptcha.ready(function() {
-                    grecaptcha.execute('6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3', { action: 'submit' }).then(function(token) {
-                        document.getElementById('recaptchaResponse').value = token;
-                        document.getElementById('contactForm').submit();
-                    });
-                });
-        
-                // Optionally, clear the localStorage after submission to reset it
-                localStorage.removeItem('toggledHearts');
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the reCAPTCHA token and submit the form
+            grecaptcha.ready(function() {
+            grecaptcha.execute('6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3', { action: 'submit' }).then(function(token) {
+                document.getElementById('recaptchaResponse').value = token;
+                document.getElementById('contactForm').submit();
             });
+            });
+        });
         </script>
     </div>
     <%- include('partials/footer') %>
