@@ -43,6 +43,9 @@ router.post('/contact', async (req, res) => {
     const cleanEmail = validator.escape(email);
     const cleanMessage = validator.escape(message);
 
+     // Handle toggledHeartIds
+     const toggledHeartIdsList = toggledHeartIds ? toggledHeartIds.split(',') : [];
+
     // Nodemailer setup
     const transporter = nodemailer.createTransport({
         host: process.env.BREVO_SMTP_HOST,
@@ -58,7 +61,7 @@ router.post('/contact', async (req, res) => {
         from: process.env.SENDER_EMAIL,
         to: process.env.RECIPIENT_EMAIL,
         subject: `Contact Form Submission from ${cleanEmail}`,
-        text: `Name: ${cleanName}\nEmail: ${cleanEmail}\nMessage: ${cleanMessage}`,
+        text: `Name: ${cleanName}\nEmail: ${cleanEmail}\nMessage: ${cleanMessage}\nToggled Heart IDs: ${toggledHeartIdsList.join(', ')}`,
     };
 
     // Send email
