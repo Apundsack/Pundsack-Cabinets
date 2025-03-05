@@ -66,11 +66,17 @@
             <input type="hidden" name="honeypot" style="display:none;">
             <input type="hidden" id="recaptchaResponse" name="g-recaptcha-response">
             <input type="submit" value="Submit">
+            <div id="formMessage" class="error-message" style="display: none;"></div>
         </form>
       </div>
         <script src="https://www.google.com/recaptcha/api.js?render=6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3"></script>
         <script>
             document.getElementById('contactForm').addEventListener('submit', function(event) {
+                // Get the toggled heart IDs from localStorage
+                const toggledHeartIds = JSON.parse(localStorage.getItem('toggledHearts')) || [];
+                document.getElementById('toggledHeartIds').value = toggledHeartIds.join(',');
+        
+                // Get the reCAPTCHA token
                 event.preventDefault();
                 grecaptcha.ready(function() {
                     grecaptcha.execute('6LckEeUqAAAAAEkt7oGsaqGEwNRl43f2l2yNm1R3', { action: 'submit' }).then(function(token) {
@@ -78,19 +84,11 @@
                         document.getElementById('contactForm').submit();
                     });
                 });
+        
+                // Optionally, clear the localStorage after submission to reset it
+                localStorage.removeItem('toggledHearts');
             });
         </script>
-
-<script>
-    // On form submission, get the toggled heart IDs from localStorage and add them to the hidden input field
-    document.getElementById('contactForm').addEventListener('submit', function(event) {
-        const toggledHeartIds = JSON.parse(localStorage.getItem('toggledHearts')) || [];
-        document.getElementById('toggledHeartIds').value = toggledHeartIds.join(',');
-        
-        // Optionally, you can clear the localStorage after submission to reset it
-        localStorage.removeItem('toggledHearts');
-    });
-</script>
     </div>
     <%- include('partials/footer') %>
 </body>

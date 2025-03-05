@@ -10,7 +10,7 @@ router.get('/contact', (req, res) => {
 });
 
 router.post('/contact', async (req, res) => {
-    const { name, email, message, honeypot, 'g-recaptcha-response': recaptchaResponse } = req.body;
+    const { name, email, message, honeypot, 'g-recaptcha-response': recaptchaResponse, toggledHeartIds } = req.body;
 
     // Honeypot check
     if (honeypot) {
@@ -43,8 +43,8 @@ router.post('/contact', async (req, res) => {
     const cleanEmail = validator.escape(email);
     const cleanMessage = validator.escape(message);
 
-     // Handle toggledHeartIds
-     const toggledHeartIdsList = toggledHeartIds ? toggledHeartIds.split(',') : [];
+    // Handle toggledHeartIds
+    const toggledHeartIdsList = toggledHeartIds ? toggledHeartIds.split(',') : [];
 
     // Nodemailer setup
     const transporter = nodemailer.createTransport({
@@ -78,5 +78,6 @@ router.post('/contact', async (req, res) => {
         res.send('Thank you for your message!');
     });
 });
+
 
 module.exports = router;
