@@ -19,8 +19,8 @@
     body {
       padding-top: 1%;
       border-color: var(--white);
-      border-left-style: solid;
-      border-left-width: 15px;
+      /* border-left-style: solid;
+      border-left-width: 15px; */
       width: auto;
       color: var(--text-color);
       background-color: var(--background-color);
@@ -36,7 +36,7 @@
       font-family: Futura XBlk BT, sans-serif;
       font-size: clamp(1.5rem, 5vw, 3rem);      
       width: auto;
-      color: var(--h1);
+      color: var(--white);
       mix-blend-mode: multiply;
     }
 
@@ -164,11 +164,12 @@ body.fade-out {
 }
 
 .highlight {
-  margin: 20px;
+  text-align: right;
+  margin: 0 10% 0 auto;
   height: 100%;
   width: 40%;
-  background-color: #FF4000;
-  background-image: url(/images/imagery/PaperTexture.jpg);
+  /* background-color: #FF4000; */
+  /* background-image: url(/images/imagery/PaperTexture.jpg); */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -186,7 +187,7 @@ body.fade-out {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(/images/imagery/PaperTexture.jpg);
+  /* background-image: url(/images/imagery/PaperTexture.jpg); */
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.45;
