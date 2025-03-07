@@ -2,84 +2,84 @@
 
   <style>
    .logoBanner {
-    background-color: white;
-    height: 100px; /* Adjust the height to ensure the pseudo-element fits */
-    width: 120px; /* Adjust width for responsiveness */
-    max-width: 1200px; /* Limit the width to avoid stretching */
-    margin: 50px 0 0 -1px; /* Center the banner and add space from the top */
+    /* background-color: white; */
+    height: 100px;
+    width: 35%;
+    max-width: 150px; 
+    margin: 10px 0 0 -1px;
     border-radius: 0 20px 20px 0;
-    position: relative; /* Position relative for pseudo-element positioning */
+    position: fixed;
     display: flex;
-    justify-content: center; /* Center the logo */
-    align-items: center; /* Vertically center the logo */
+    justify-content: center;
+    align-items: center;
   }
 
   .logo {
     background-image: url(/images/imagery/Logo.png);
-    background-size: contain; /* Ensure logo is contained and not stretched */
-    background-repeat: no-repeat; /* Prevent repeating the logo */
-    background-position: center; /* Center the logo inside the div */
-    height: 149px;
-    width: 100px;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(1);
   }
 
   /* Add a pseudo-element to the top */
-  .logoBanner::before {
+  /* .logoBanner::before {
     content: "";
     position: absolute;
-    top: -40px; /* Adjust to position the element just above the banner */
+    top: -40px;
     left: 0px;
     height: 40px;
     width: 40px;
     background: transparent;
-    border-bottom-left-radius: 50%; /* Create a rounded corner on the top right */
-    box-shadow: -20px 20px 0 0 var(--white); /* Shadow effect */
-  }
+    border-bottom-left-radius: 50%; 
+    box-shadow: -20px 20px 0 0 var(--white); 
+  } */
 
   /* Keep the original pseudo-element */
-  .logoBanner::after {
+  /* .logoBanner::after {
     content: "";
     position: absolute;
-    bottom: -40px; /* Adjust to position the element just below the banner */
+    bottom: -40px;
     left: 0;
     height: 40px;
     width: 40px;
     background: transparent;
-    border-top-left-radius: 50%; /* Create the inverse corner effect */
-    box-shadow: -20px -20px 0 0 var(--white); /* Shadow effect */
-  }
+    border-top-left-radius: 50%;
+    box-shadow: -20px -20px 0 0 var(--white);
+  } */
 
-/* Keep the original styles for the radialMenu and menu options */
 .radialMenu {
   transform-origin: left center;
-  z-index: 100; /* Ensure the menu is on top */
-  position: absolute; /* Fixed position to stay in place */
+  z-index: 100; 
+  position: fixed; 
   left: 120px;
-  transform: rotate(-90deg); /* Start the radial menu rotated */
-  transition: transform 0.75s ease-out; /* Smooth transition for the menu rotation with ease-out */
+  transform: rotate(-90deg); 
+  transition: transform 0.75s ease-out; 
 }
 
-/* Show the radial menu when active */
+
 .radialMenu.active {
-  transform: rotate(0deg); /* Rotate to original position when active */
+  transform: rotate(0deg); 
 }
 
 .menuOption {
   position: absolute;
-  width: 35vw;  /* The width of each swatch */
-  height: 150px;  /* The height of each swatch */
+  width: 35vw;  
+  height: 150px;  
   background: repeating-linear-gradient(
-    to right,  /* Gradient direction (horizontal) */
-    #F0C7A3,   /* Starting red */
-    #F0C7A3 20%, /* First shade of red */
-    #E5A98B 20%, /* Lighter red */
-    #E5A98B 40%, /* Second shade of red (lightened) */
-    #D17C5A 40%, /* Lighter peachy red */
-    #D17C5A 60%, /* Third shade (peachy) */
-    #B84A3A 60%, /* Very light peach */
-    #B84A3A 80%, /* Fourth shade (pale peach) */
-    #9D2719 80%, /* Almost pink */
-    #9D2719 100% /* Lightest pink */
+    to right,  
+    #F0C7A3,   
+    #F0C7A3 20%,
+    #E5A98B 20%,
+    #E5A98B 40%,
+    #D17C5A 40%,
+    #D17C5A 60%,
+    #B84A3A 60%,
+    #B84A3A 80%,
+    #9D2719 80%, 
+    #9D2719 100% 
   );
   display: flex;
   justify-content: center;
@@ -88,12 +88,12 @@
   color: white;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 5px; /* Optional, rounded corners for the swatches */
+  border-radius: 5px;
   z-index: 10;
-  transition: transform 0.3s ease-out;  /* Smooth transition for rotation with ease-out */
+  transition: transform 0.3s ease-out;
   justify-content: right;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Optional, shadow for depth */
-  border: 5px solid white; /* White border around the entire .menuOption */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
+  border: 5px solid white; 
 }
 
 
@@ -101,25 +101,25 @@
 .option1 {
   transform-origin: left center;
   transform: rotate(0deg);
-  transition: transform 0.9s ease-out;  /* Smooth transition for rotation with ease-out */
+  transition: transform 0.9s ease-out;
 }
 
 .option2 {
   transform-origin: left center;
   transform: rotate(0deg);
-  transition: transform 0.9s ease-out;  /* Smooth transition for rotation with ease-out */
+  transition: transform 0.9s ease-out;
 }
 
 .option3 {
   transform-origin: left center;
   transform: rotate(0deg);
-  transition: transform 0.9s ease-out;  /* Smooth transition for rotation with ease-out */
+  transition: transform 0.9s ease-out;
 }
 
 .option4 {
   transform-origin: left center;
   transform: rotate(0deg);
-  transition: transform 0.9s ease-out;  /* Smooth transition for rotation with ease-out */
+  transition: transform 0.9s ease-out;
 }
 
 
@@ -147,10 +147,10 @@
 .menuOption a {
   color: white;
   text-decoration: none;
-  display: block; /* Make the anchor tag a block element to take full width and height */
-  transform: rotate(-90deg);  /* Rotate the text by -90 degrees */
-  white-space: nowrap;  /* Prevent text from wrapping */
-  padding: 10px 0; /* Adjust padding to make the text fit inside the element */
+  display: block;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+  padding: 10px 0;
 }
 
   </style>
@@ -163,8 +163,8 @@
 </div>
 
 
-  <div class="logoBanner" onclick="toggleRadialMenu()">
-    <div class="logo"></div>
+  <div class="logoBanner"onclick="toggleRadialMenu()">
+    <div class="logo" id="logo"></div>
 </div>
 
 
@@ -190,6 +190,15 @@
               window.scrollTo(0, savedScrollPosition);
           }
       });
+      window.addEventListener('DOMContentLoaded',function () {
+      const content = document.querySelector('.content');
+
+      if(content){
+        window.addEventListener('scroll', () => {
+            document.getElementById('logo').style.filter = 'invert(' + Math.min(1 - window.scrollY / 100, 1) + ')';
+            });
+          }
+        });
   </script>
 
   <script>
