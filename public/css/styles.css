@@ -120,6 +120,7 @@
       transition: all 0.5s ease-out;
   }
   .cardContainer {
+    margin-top: 100px;
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
     gap: 20px; /* Space between the cards */
@@ -128,7 +129,9 @@
   @media (max-width: 767px) {
     .cardContainer {
       grid-template-columns: repeat(1, 1fr); /* Stack the cards in a single column on smaller screens */
+      margin-top: 150px;
     }
+
   }
 
   .card {
@@ -281,6 +284,9 @@ td a:hover {
   }
   .content{
     margin-top: 175px !important;
+  }
+  .hero{
+    background-position: center center; /* Keeps the image centered */
   }
 
 }
