@@ -48,16 +48,21 @@
     </style>
     <script>
         // Function to load heart states from localStorage and update the hidden input field
-        function loadToggledHeartIds() {
-          // Get the toggled heart IDs from localStorage
-          const toggledHeartIds = JSON.parse(localStorage.getItem('toggledHeartIds')) || [];
-      
+        function loadToggledHeartIds() { 
+            const trueValues = {};
+            const data = JSON.parse(localStorage.getItem('heartStates')) || {};
+            for (const key in data) {
+                if (data[key] === true) {
+                trueValues[key] = true;
+                }
+            }   
+
           // Set the hidden input field with the toggled heart IDs (comma-separated)
-          document.getElementById('toggledHeartIds').value = toggledHeartIds.join(',');
+          document.getElementById('toggledHeartIds').value = Object.keys(trueValues).join(',');
         }
       
         // Call the function when the page loads
-        window.onload = loadToggledHeartIds;
+        setTimeout(loadToggledHeartIds, 5000);
       </script>
       
 </head>
