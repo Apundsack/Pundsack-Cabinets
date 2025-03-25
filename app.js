@@ -3,7 +3,9 @@ const path = require('path');
 const fs = require('fs');
 const galleryRoutes = require('./routes/gallery');
 const contactRoutes = require('./routes/contact'); // Import contact routes
+const aboutRoutes = require('./routes/about'); // Import about routes
 const bodyParser = require('body-parser'); // Import body-parser
+const indexRoutes = require('./routes/index');
 const app = express();
 const port = process.env.PORT || 3000;
 require('dotenv').config(); // Load environment variables
@@ -24,10 +26,16 @@ app.use(galleryRoutes); // Ensure gallery routes are first
 // Register contact routes
 app.use(contactRoutes); // Add contact routes
 
+// Register about routes
+app.use('/about', aboutRoutes);
+
+// Register index routes
+app.use(indexRoutes); // Add index routes
+
 // Dynamically load all other routes (if needed)
 const routesPath = path.join(__dirname, 'routes');
 fs.readdirSync(routesPath).forEach(file => {
-  if (file !== 'gallery.js' && file !== 'contact.js') { // Avoid loading gallery.js and contact.js again
+  if (file !== 'gallery.js' && file !== 'contact.js' && file !== 'about.js') { // Avoid loading gallery.js, contact.js, and about.js again
     const route = require(path.join(routesPath, file));
     app.use('/', route);
   }

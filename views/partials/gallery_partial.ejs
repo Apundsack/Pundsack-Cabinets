@@ -6,16 +6,14 @@
     const match = photo.url.match(/img_(\d+)\.avif/);
     const imageId = match ? match[1] : '';  // Extract the number or use an empty string if not matched
   %>
-    <span class="heart-icon" onclick="toggleHeart(this)" data-id="<%= imageId %>">
 
-    <div class="gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>">
+    <div class="heart-icon gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>" onclick="toggleHeart(this)" data-id="<%= imageId %>">
         <a href="/gallery/<%= path.basename(photo.url) %>">
             <img src="<%= photo.url %>" alt="<%= photo.url %>">
         </a>    
-
+        &#9825;
     </div>
-    &#9825;
-</span> 
+    
 <% }) %>
 
 </div>

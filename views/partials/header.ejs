@@ -12,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
   }
 
   .logo {
@@ -53,55 +54,51 @@
     .logoBanner{
       width: 20%;
       height: 10%;
-    }
-    .menuOption {
-      width: 65vw;  
+    }   
+    /* .menuOption {
+      width: 50vw !important;  
       height: 8vh !important;  
-    }
+    } */
   }
-.radialMenu {
-  transform-origin: right center;
-  z-index: 100; 
-  position: fixed; 
-  right: 45vw;
-  transform: rotate(0deg); 
-  transition: transform 0.75s ease-out; 
+  .radialMenu {
+  position: fixed;
+  right: 0;
+  top: -30px;
+  transition: transform 0.75s ease-out;
+  border-radius: 0 0 10px 10px;
+  display: flex; 
+  z-index: 100;
 }
 
-
-.radialMenu:hover {
-  transform: rotate(0deg); 
-}
-
-.menuOption::after{
+.menuOption::after {
   content: "";
   position: absolute;
   top: 0;
-  right: 0;
-  width: 100%; 
-  height: 100%; 
+  left: 0; /* Align to the top-left of each menuOption */
+  width: 100%;  /* Ensure it matches the width of the individual option */
+  height: 100%; /* Ensure it matches the height of the individual option */
   background-image: url(/images/imagery/LightWoodTexture.jpg); 
   opacity: 0.5;
-  z-index: 12;
+  border-radius: 0 0 10px 10px; /* Apply rounded corners to the bottom */
 }
 
 .menuOption {
-  position: absolute;
-  top: 10px;
-  width: 40vw;  
-  height: 13vh;  
+  position: relative;  /* Set position relative to its own container */
+  height: 13vh;
+  width: auto;  /* Ensure each option width fits content */
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
   border-radius: 0;
-  z-index: 10;
   transition: transform 0.3s ease-out;
-  justify-content: right;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
-  /* border: 5px solid white;  */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .option1 {
+  border-radius:  0 0 10px 10px;   
   background: repeating-linear-gradient(
-    to right,  
+    to bottom,  
     #F0C7A3,
 #F0C7A3 20%,
 #E5A98B 20%,
@@ -114,13 +111,13 @@
 #9D4F39 100%
   );
   transform-origin: left center;
-  transform: rotate(0deg);
-  transition: transform 0.9s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 .option2 {
+  border-radius: 0 0 10px 10px;  
   background: repeating-linear-gradient(
-    to right,  
+    to bottom,  
     #F0C7A3,
 #F0C7A3 20%,
 #E5A98B 20%,
@@ -133,13 +130,13 @@
 #9D7419 100%
   );
   transform-origin: left center;
-  transform: rotate(0deg);
-  transition: transform 0.9s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 .option3 {
+  border-radius: 0 0 10px 10px;   
   background: repeating-linear-gradient(
-    to right,  
+    to bottom,  
     #6E4B3A,
 #6E4B3A 20%,
 #5E3B2A 20%,
@@ -152,13 +149,13 @@
 #2F1100 100%
   );
   transform-origin: left center;
-  transform: rotate(0deg);
-  transition: transform 0.9s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 .option4 {
+  border-radius:  0 0 10px 10px;    
   background: repeating-linear-gradient(
-    to right,  
+    to bottom,  
     #8C5A3B,
 #8C5A3B 20%,
 #7A4A2C 20%,
@@ -171,52 +168,48 @@
 #4A1A00 100%
   );
   transform-origin: left center;
-  transform: rotate(0deg);
-  transition: transform 0.9s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
-.radialMenu:hover .option1 {
+.option1:hover {
   transform-origin: left center;
-  transform: translateY(-1vh);
+  transform:translateY(3vh);
 }
 
-.radialMenu:hover .option2 {
+.option2:hover {
   transform-origin: left center;
-  transform: translateY(7vh);
+  transform: translateY(3vh);
 }
 
-.radialMenu:hover .option3 {
+.option3:hover {
   transform-origin: left center;
-  transform: translateY(15vh);
+  transform: translateY(3vh);
 }
 
-.radialMenu:hover .option4 {
+.option4:hover {
   transform-origin: left center;
-  transform: translateY(23vh);
+  transform: translateY(3vh);
 }
 
 .menuOption a {
-  width: min-content;
-  height: min-content;
-  color: #251914;
+  color: rgba(125, 102, 72, 0.7);
   text-decoration: none;
   display: block;
-  /* transform: rotate(-90deg); */
   white-space: nowrap;
-  padding: 5px;
-  z-index: 15;
-  font-size: calc(12px + 1vw);
-  font-weight: bolder;
-  opacity: 0.75;
-  margin-top: 8px;
-  text-shadow: 0px 0px 5px rgba(55, 22, 6, 0.8);
+  padding: 5px 2vw;
+  font-size: clamp(0.5rem, 5vw, 1.5rem);
+  font-weight: 800;
+  text-shadow: 0 0 1px rgba(55, 22, 6, 0.75);
+  font-family: Futura Medium BT, sans-serif;
+  mix-blend-mode: multiply;
+  z-index: 1;
 }
 
   </style>
 <!-- Radial Menu -->
 <div class="radialMenu" id="radialMenu">
-  <div class="menuOption option1"><a href="/">Home</a></div>
-  <div class="menuOption option2"><a href="/about">About Us</a></div>
+  <!-- <div class="menuOption option1"><a href="/">Home</a></div> -->
+  <div class="menuOption option2"><a href="/about">About</a></div>
   <div class="menuOption option3"><a href="/gallery">Gallery</a></div>
   <div class="menuOption option4"><a href="/contact">Contact Us</a></div>
 </div>
