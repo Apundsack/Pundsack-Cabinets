@@ -20,25 +20,23 @@
     }
 
     #hero-video {
-      position: fixed;
-      top: -12%;
-      left: 0;
-      width: 100%;
-      height: auto;
+      position: absolute;
+      width: 125%;
+      height: 125%;
       object-fit: cover;
       z-index: -1;
+      transform: translate(-12%, -4%);
     }
 
     .overlay {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 500%;
-  background: rgba(0, 0, 0, 0.5);
-  display: block; 
-}
+      position: absolute;
+      width: 125%;
+      height: 125%;
+      object-fit: cover;
+      transform: translate(-12%, -4%);
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 0; /* Ensure it sits above the video but below other content */
+  }
 
 
   </style>
@@ -56,8 +54,12 @@
         <h1>Home</h1>
       </div>
   <main>      
-    <h1>Welcome to Pundsack Cabinets</h1>
+    <h1>Custom Cabinets Your Way</h1>
+    <p style="color:white;">Beautiful Cabinets Tailored to Fit Your Needs</p>
+    <a href="/gallery"><button>Explore Our Work</button></a>
     <aside>
+      <!-- <div style="background-color: white;"><p>Quality is our Priority
+        Commercial quality woodwork – custom designed for your home or office. We strive to make every job our best work.</p></div> -->
       <!-- <div class="cardContainer">
       <a href="/about"><div class="card aboutCard">
         <h2>About Us</h2>

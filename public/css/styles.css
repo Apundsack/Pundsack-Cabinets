@@ -54,13 +54,28 @@
     }
 
     .content {
-      margin:50px 0 250px 0;
+      margin:150px 0 250px 0;
       padding: 20px 0 20px 20px;
       width: 95%;
       height: auto;
       min-height: 40vh;
       background-color: var(--white);
       border-radius: 0 25px 25px 0;
+    }
+
+    button {
+      background-color: var(--yellow);
+      color: var(--dark);
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      filter: brightness(0.85);
     }
 
     .nav {

@@ -6,21 +6,64 @@
   <title>About Us</title>
   <link rel="stylesheet" href="/css/styles.css">
   <style>
-    .hero{
+    .hero {
       background-image: url(/images/imagery/DSC_0081.JPG);
     }
+    .section-title {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    .bio img, .owner img {
+      width: 25%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    .bio, .owner, .custom-work, .wood-types, .stain-colors {
+      padding: 0 8vw 0 8vw; 
+    }
+
   </style>
 </head>
 <body class="hero">
   <%- include('partials/header') %>
+  
   <div class="highlight">
     <h1>About Us</h1>
   </div>
-    <div class="content">
-      <p>Check back next week for video content, the Pundsack Cabinets story and images of our process</p>
 
-      <img src="/images/imagery/headshot.JPG" alt="Pundsack Cabinets" style="width: 25%; height: auto;">
+  <div class="content" style="text-align:center;">
+    <div class="bio">
+      <h2 class="section-title">Our Story</h2>
+      <p>Pundsack Cabinets has been creating high-quality custom cabinetry for over a decade. Our shop is dedicated to providing top-notch craftsmanship and personalized service for every project we undertake.</p>
+      <img src="/images/imagery/shop-photo.jpg" alt="Our Shop">
     </div>
+
+    <div class="owner">
+      <h2 class="section-title">Meet the Owner</h2>
+      <p>With years of experience and a deep love for woodworking, Greg Pundsack brings both skill and vision to every project.</p>
+      <img src="/images/imagery/headshot.JPG" alt="Owner Headshot">
+    </div>
+
+    <div class="custom-work">
+      <h2 class="section-title">Custom Work</h2>
+      <p>At Pundsack Cabinets, we pride ourselves on being able to create anything you envision. From custom cabinetry to unique pieces, we can build one-of-a-kind items tailored to your specific needs. Whether it’s a bold design or a simple piece, if you can dream it, we can craft it.</p>
+    </div>
+
+    <div class="wood-types">
+      <h2 class="section-title">Wood Types</h2>
+      <p>We work with a variety of wood types to bring your vision to life.</p>
+      <a href="/wood"><button>Learn More</button></a>
+    </div>
+
+    <div class="stain-colors">
+      <h2 class="section-title">Finishes</h2>
+      <p>Learn more about the variety of finishes we offer.</p>
+      <a href="/stain"><button>Stains</button></a>
+      <a href="/paint"><button>Painted</button></a>
+  </div>
+</div>  
   <%- include('partials/footer') %>
 </body>
 </html>
