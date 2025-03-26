@@ -9,21 +9,63 @@
     .hero {
       background-image: url(/images/imagery/DSC_0081.JPG);
     }
+
     .section-title {
       font-size: 2em;
       margin-top: 20px;
     }
 
     .bio img, .owner img {
-      width: 25%;
+      width: 50%;
       height: auto;
-      margin-top: 20px;
+      /* margin-top: 20px;
+      margin-bottom: 20px; */
     }
 
     .bio, .owner, .custom-work, .wood-types, .stain-colors {
       padding: 0 8vw 0 8vw; 
     }
 
+    .bio, .owner {
+      background-color: #D7DAE5;
+      border-radius: 25px 0 0 25px;
+    }
+
+    /* Flexbox for desktop view (left-right) */
+    .section {
+      display: flex;
+      align-items: center; /* Vertically center content */
+      justify-content: space-between; /* Space out title and content */
+      margin-bottom: 40px;
+    }
+
+    .section .text {
+      flex: 1;
+      padding-right: 20px; /* Add some space between text and image */
+    }
+
+    .section img {
+      flex: 0 0 40%; /* Image takes up 40% of the width */
+      max-width: 100%; /* Ensure image scales properly */
+    }
+
+    /* Mobile view (title, image, text stacked vertically) */
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center content */
+        text-align: center; /* Center text */
+      }
+
+      .section img {
+        width: 80%; /* Image takes up 80% width on mobile */
+        margin-top: 20px;
+      }
+
+      .section .text {
+        padding-right: 0; /* Remove extra padding on smaller screens */
+      }
+    }
   </style>
 </head>
 <body class="hero">
@@ -34,36 +76,47 @@
   </div>
 
   <div class="content" style="text-align:center;">
-    <div class="bio">
-      <h2 class="section-title">Our Story</h2>
-      <p>Pundsack Cabinets has been creating high-quality custom cabinetry for over a decade. Our shop is dedicated to providing top-notch craftsmanship and personalized service for every project we undertake.</p>
+    <div class="bio section" style="margin-top:40px;">
+      <div class="text">
+        <h2 class="section-title">Our Story</h2>
+        <p>Pundsack Cabinets has been creating high-quality custom cabinetry for over a decade. Our shop is dedicated to providing top-notch craftsmanship and personalized service for every project we undertake.</p>
+      </div>
       <img src="/images/imagery/shop-photo.jpg" alt="Our Shop">
     </div>
 
-    <div class="owner">
-      <h2 class="section-title">Meet the Owner</h2>
-      <p>With years of experience and a deep love for woodworking, Greg Pundsack brings both skill and vision to every project.</p>
+    <div class="owner section">
+      <div class="text">
+        <h2 class="section-title">Meet the Owner</h2>
+        <p>With years of experience and a deep love for woodworking, Greg Pundsack brings both skill and vision to every project.</p>
+      </div>
       <img src="/images/imagery/headshot.JPG" alt="Owner Headshot">
     </div>
 
-    <div class="custom-work">
-      <h2 class="section-title">Custom Work</h2>
-      <p>At Pundsack Cabinets, we pride ourselves on being able to create anything you envision. From custom cabinetry to unique pieces, we can build one-of-a-kind items tailored to your specific needs. Whether it’s a bold design or a simple piece, if you can dream it, we can craft it.</p>
+    <div class="custom-work section">
+      <div class="text">
+        <h2 class="section-title">Custom Work</h2>
+        <p>At Pundsack Cabinets, we pride ourselves on being able to create anything you envision. From custom cabinetry to unique pieces, we can build one-of-a-kind items tailored to your specific needs. Whether it’s a bold design or a simple piece, if you can dream it, we can craft it.</p>
+      </div>
     </div>
 
-    <div class="wood-types">
-      <h2 class="section-title">Wood Types</h2>
-      <p>We work with a variety of wood types to bring your vision to life.</p>
-      <a href="/wood"><button>Learn More</button></a>
+    <div class="wood-types section">
+      <div class="text">
+        <h2 class="section-title">Wood Types</h2>
+        <p>We work with a variety of wood types to bring your vision to life.</p>
+        <a href="/wood"><button>Learn More</button></a>
+      </div>
     </div>
 
-    <div class="stain-colors">
-      <h2 class="section-title">Finishes</h2>
-      <p>Learn more about the variety of finishes we offer.</p>
-      <a href="/stain"><button>Stains</button></a>
-      <a href="/paint"><button>Painted</button></a>
-  </div>
-</div>  
+    <div class="stain-colors section">
+      <div class="text">
+        <h2 class="section-title">Finishes</h2>
+        <p>Learn more about the variety of finishes we offer.</p>
+        <a href="/stain"><button>Stains</button></a>
+        <a href="/paint"><button>Painted</button></a>
+      </div>
+    </div>
+  </div>  
+
   <%- include('partials/footer') %>
 </body>
 </html>

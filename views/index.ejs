@@ -24,7 +24,6 @@
       width: 125%;
       height: 125%;
       object-fit: cover;
-      z-index: -1;
       transform: translate(-12%, -4%);
     }
 
@@ -35,13 +34,14 @@
       object-fit: cover;
       transform: translate(-12%, -4%);
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-    z-index: 0; /* Ensure it sits above the video but below other content */
+    z-index: 1; /* Ensure it sits above the video but below other content */
   }
 
 
   </style>
 </head>
-<body class="hero">
+<body>
+  <div class="hero">
   <div class="overlay">
 </div>
 <video autoplay muted loop id="hero-video">
@@ -57,9 +57,9 @@
     <h1>Custom Cabinets Your Way</h1>
     <p style="color:white;">Beautiful Cabinets Tailored to Fit Your Needs</p>
     <a href="/gallery"><button>Explore Our Work</button></a>
+  </div>
     <aside>
-      <!-- <div style="background-color: white;"><p>Quality is our Priority
-        Commercial quality woodwork – custom designed for your home or office. We strive to make every job our best work.</p></div> -->
+
       <!-- <div class="cardContainer">
       <a href="/about"><div class="card aboutCard">
         <h2>About Us</h2>
@@ -79,7 +79,10 @@
       </div> -->
   </aside>
   </main>
-  
+  <div class="content">
+        <div style="background-color: white;position:relative;"><p>Quality is our Priority
+        Commercial quality woodwork – custom designed for your home or office. We strive to make every job our best work.</p></div>
+        </div>
   <%- include('partials/footer') %>
 </div>
 </body>
