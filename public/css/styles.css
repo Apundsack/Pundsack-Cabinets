@@ -41,7 +41,7 @@
     h1 {
       display: inline;
       font-family: Futura XBlk BT, sans-serif;
-      font-size: clamp(1.5rem, 5vw, 3rem);      
+      font-size: 3rem;   
       width: auto;
       color: var(--white);
       mix-blend-mode: multiply;
@@ -206,33 +206,10 @@ body.fade-out {
 
 
 .highlight {
-  display: none;;
   text-align: left;
   margin: 0 auto 0 20%;
-  height: 100px;
-  /* background-color: #FF4000; */
-  /* background-image: url(/images/imagery/PaperTexture.jpg); */
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-blend-mode: multiply;
-  opacity: 0.99;
   padding: 20px;
-  position: relative;
-  border-radius: 15px;
-}
-
-.highlight::before {
-  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* background-image: url(/images/imagery/PaperTexture.jpg); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.45;
   border-radius: 15px;
 }
 

@@ -6,6 +6,16 @@
   <title>Pundsack Cabinets</title>
   <link rel="stylesheet" href="/css/styles.css">
   <style>
+    .after{
+      margin:100px 0 250px 0;
+      padding: 20px 20px 20px 20px;
+      width: 100%;
+      height: auto;
+      min-height: 40vh;
+      background-color: var(--white);
+      z-index: 1;
+      position: relative;
+    }
     body{
      width: 100%;
     }
@@ -36,9 +46,155 @@
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
     z-index: 1; /* Ensure it sits above the video but below other content */
   }
+  .testimonial-carousel {
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 80%;
+  text-align: center;
+}
+
+.testimonial-carousel h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-size: 1.2em;
+  text-align: center;
+  color: #333;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.carousel-controls button {
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.5em;
+}
+
+.carousel-controls button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-indicators {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.carousel-indicators span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.carousel-indicators .active {
+  background-color: #333;
+}
+
+.carousel-item p {
+  width: 50vw; /* Set the text width to 75% of the parent */
+  margin: 0 auto; /* Center the text horizontally */
+}
+
+
 
 
   </style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+    const carousel = document.querySelector('.carousel');
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+
+    // Create circle indicators dynamically based on the total number of items
+    for (let i = 0; i < totalItems; i++) {
+      const indicator = document.createElement('span');
+      indicator.addEventListener('click', () => setCurrentIndex(i));
+      indicatorsContainer.appendChild(indicator);
+    }
+
+    // Update the active indicator
+    function updateIndicators() {
+      const indicators = document.querySelectorAll('.carousel-indicators span');
+      indicators.forEach((indicator, index) => {
+        if (index === currentIndex) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+    }
+
+    // Update the carousel position
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+      updateIndicators();
+    }
+
+    // Move to next item
+    function showNextItem() {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarousel();
+    }
+
+    // Move to previous item
+    function showPrevItem() {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarousel();
+    }
+
+    // Set the current index based on a specific indicator
+    function setCurrentIndex(index) {
+      currentIndex = index;
+      updateCarousel();
+    }
+
+    // Button event listeners
+    document.querySelector('.next').addEventListener('click', showNextItem);
+    document.querySelector('.prev').addEventListener('click', showPrevItem);
+
+    // Initialize the carousel and indicators
+    updateCarousel();
+  });
+</script>
+
 </head>
 <body>
   <div class="hero">
@@ -49,10 +205,6 @@
   Your browser does not support the video tag.
 </video>
     <%- include('partials/header') %>    
-    
-    <div class="highlight">
-        <h1>Home</h1>
-      </div>
   <main>      
     <h1>Custom Cabinets Your Way</h1>
     <p style="color:white;">Beautiful Cabinets Tailored to Fit Your Needs</p>
@@ -79,8 +231,66 @@
       </div> -->
   </aside>
   </main>
-  <div class="content">
-        <div style="background-color: white;position:relative;"><p>Quality is our Priority
+  <div class="after">
+        <div style="background-color: white;position:relative;">
+          <div class="testimonial-carousel">
+            <h2>What Our Customers Say</h2>
+            <div class="carousel-container">
+              <div class="carousel">
+                <div class="carousel-item">
+                  <p>"Pictures don’t lie. Greg turned our 100-year-old ugly kitchen into our dream kitchen! See the before pictures and you decide if he’s the best or not."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Greg made me a cabinet for my kitchen. I absolutely love it. Awesome craftsmanship. Best purchase ever. Also made a cabinet for my son's bathroom. It is gorgeous."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"We've had Greg do a couple of projects through the years (custom child's gate, stair banister) and both turned out even better than I imagined! He does great work and pays close attention to details. Trustworthy and honest! We currently have two more projects in the works with him right now (custom built-in entry way and office desks/cabinets)!"</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Greg had now done 2 kitchens for me and just finished a whole house (almost) interior trim job plus door installation. Meticulous work plus a great attitude and sense of humor."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Greg did a great job on kitchen and bathroom cabinets for my cabin. Very knowledgeable, easy to deal with."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Our shoe shelf. Custom made by Pundsack Cabinets. Our home is no longer overrun with footwear!"</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Thanks again for the fantastic work! Northland lumber is proud to say we work with Pundsack cabinets!"</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"I Have had the privilege of working with him building cabinets. He is very good at what he does if you get a job done by him it is nothing but the finest. He also has a good personality which makes him very easy to work with on the cabinets you want."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"If you're looking for someone who does amazing woodworking, check out Pundsack Cabinets! Awesome work and attention to details."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Credit goes to Pundsack Cabinets!!! Had to get them in for the brick work that comes next. But Greg does AMAZING work! Hands down would recommend him to everyone!"</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"We want to thank you for all your help with our project and the outstanding workmanship. We love the cabinets so much! Thank you again for all you did for us."</p>
+                </div>
+                <div class="carousel-item">
+                  <p>"Thank you, Greg! I love my new kitchen!"</p>
+                </div>
+              </div>
+              <!-- Static Buttons for Carousel Navigation -->
+              <div class="carousel-controls">
+                <button class="prev">❮</button>
+                <button class="next">❯</button>
+              </div>
+            </div>
+            <!-- Circle Indicators -->
+            <div class="carousel-indicators">
+              <!-- Indicator circles will be dynamically generated here -->
+            </div>
+          </div>
+          
+            </div>
+          </div>
+          
+          
+          <p>Quality is our Priority
         Commercial quality woodwork – custom designed for your home or office. We strive to make every job our best work.</p></div>
         </div>
   <%- include('partials/footer') %>
