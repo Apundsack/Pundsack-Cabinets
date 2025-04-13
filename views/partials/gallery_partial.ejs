@@ -9,7 +9,7 @@
 
     <div class="heart-icon gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>" onclick="toggleHeart(this)" data-id="<%= imageId %>">
         <a href="/gallery/<%= path.basename(photo.url) %>">
-            <img src="<%= photo.url %>" alt="<%= photo.url %>">
+            <img src="<%= photo.url %>" alt="<%= photo.url %>" loading="lazy">
         </a>    
         &#9825;
     </div>
