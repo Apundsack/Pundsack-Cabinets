@@ -5,93 +5,81 @@ const sizeOf = require('image-size');
 const exifreader = require('exifreader'); // Import the exifreader for metadata extraction
 const router = express.Router();
 
+let cachedPhotos = null; // Cache for photo metadata
+
+// Function to get all photos with dimensions and metadata
 async function getAllPhotosWithDimensions(dir) {
   const files = fs.readdirSync(dir);
-  const photosWithDimensions = [];
 
-  for (const file of files) {
+  // Process all files concurrently using Promise.all
+  const photoPromises = files.map(async (file) => {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
     if (stat.isDirectory()) {
-      const subDirPhotos = await getAllPhotosWithDimensions(filePath);
-      photosWithDimensions.push(...subDirPhotos);
+      return getAllPhotosWithDimensions(filePath); // Recursively process subdirectories
     } else if (/\.(jpg|jpeg|png|gif|avif)$/i.test(file)) {
       try {
         const dimensions = sizeOf(filePath);
         const imageBuffer = fs.readFileSync(filePath);
         const tags = exifreader.load(imageBuffer, { expanded: true });
 
-        const extractTagFromXPKeywords = (tagData) => {
-          if (tagData && typeof tagData === 'object' && tagData.description) {
-            const tags = tagData.description.toLowerCase().split(';').map(tag => tag.trim()).filter(tag => tag !== '');
-            return tags;
-          } else {
-            return [];
-          }
-        };
+        // Extract tags
+        const xpKeywordsArray = tags['exif']?.XPKeywords?.description
+          ? tags['exif'].XPKeywords.description.split(';').map(tag => tag.trim().toLowerCase())
+          : [];
+        const imageDescArray = tags['ImageDescription']?.description
+          ? [tags['ImageDescription'].description.toLowerCase().trim()]
+          : [];
+        const subjectTagsArray = tags['xmp']?.subject?.value || [];
+        const lastKeywordXMPArray = tags['xmp']?.LastKeywordXMP?.value || [];
+        const xmpSubjectTagsArray = tags['xmp']?.['dc:subject']?.value || [];
 
-        const extractTagSimple = (tagValue, tagName) => {
-          if (tagValue && typeof tagValue === 'string') {
-            const extracted = [tagValue.toLowerCase().trim()];
-            return extracted;
-          } else {
-            return [];
-          }
-        };
-
-        const extractTagsArray = (tagData, tagName) => {
-          if (tagData?.value && Array.isArray(tagData.value)) {
-            const extracted = tagData.value.map(item => String(item).toLowerCase().trim()).filter(item => item !== '[object object]' && item !== '' && item !== '0');
-            return extracted;
-          } else {
-            return [];
-          }
-        };
-
-        const xpKeywordsArray = extractTagFromXPKeywords(tags['exif']?.XPKeywords);
-        const imageDescArray = extractTagSimple(tags['ImageDescription']?.description, 'ImageDescription');
-        const subjectTagsArray = extractTagsArray(tags['xmp']?.subject, 'xmp.subject');
-        const lastKeywordXMPArray = extractTagsArray(tags['xmp']?.LastKeywordXMP, 'xmp.LastKeywordXMP');
-        const xmpSubjectTagsArray = extractTagsArray(tags['xmp']?.['dc:subject'], 'xmp.dc.subject');
-
-        // Combine the extracted tags
-        const combinedTags = [
-          ...xpKeywordsArray,
-          ...imageDescArray,
-          ...subjectTagsArray,
-          ...lastKeywordXMPArray,
-          ...xmpSubjectTagsArray
-        ];
-
-        // Filter out empty strings and ensure uniqueness
-        const tagArray = combinedTags.filter(tag => tag).filter((tag, index) => combinedTags.indexOf(tag) === index);
-
+const combinedTags = [
+  ...xpKeywordsArray,
+  ...imageDescArray,
+  ...subjectTagsArray,
+  ...lastKeywordXMPArray,
+  ...xmpSubjectTagsArray,
+]
+  .map(tag => (typeof tag === 'string' ? tag.toLowerCase().trim() : '')) // Ensure tags are strings
+  .filter((tag, index, self) => tag && self.indexOf(tag) === index); // Remove empty tags and deduplicate
 
         const relativePath = filePath.replace(path.join(__dirname, '../public'), '');
 
-        photosWithDimensions.push({
+        return {
           url: relativePath,
           width: dimensions.width,
           height: dimensions.height,
-          tags: tagArray
-        });
+          tags: combinedTags,
+        };
       } catch (err) {
         console.error(`Error processing ${filePath}:`, err);
+        return null; // Skip files with errors
       }
     }
-  }
+    return null; // Skip non-image files
+  });
 
-  return photosWithDimensions;
+  const photos = await Promise.all(photoPromises);
+  return photos.flat().filter(photo => photo !== null); // Flatten and filter out null values
 }
 
+// Function to get cached photos
+async function getCachedPhotos(dir) {
+  if (cachedPhotos) {
+    return cachedPhotos; // Return cached data if available
+  }
 
+  cachedPhotos = await getAllPhotosWithDimensions(dir); // Cache the processed data
+  return cachedPhotos;
+}
 
 // Route for the gallery page
 router.get('/gallery', async (req, res) => {
   const photosDir = path.join(__dirname, '../public/images/photos');
   try {
-    const photos = await getAllPhotosWithDimensions(photosDir);
+    const photos = await getCachedPhotos(photosDir);
     if (photos.length === 0) {
       return res.status(404).send('No photos found.');
     }
@@ -108,20 +96,21 @@ router.get('/gallery', async (req, res) => {
   }
 });
 
-
+// Route for a single image
 router.get('/gallery/:imageName', async (req, res) => {
   const imageName = decodeURIComponent(req.params.imageName);
   const photosDir = path.join(__dirname, '../public/images/photos');
 
   try {
-    const allPhotos = await getAllPhotosWithDimensions(photosDir);
-    const photo = allPhotos.find(p => path.basename(p.url) === imageName);
+    // Locate the specific image file
+    const imagePath = path.join(photosDir, imageName);
 
-    if (!photo) {
+    // Check if the file exists
+    if (!fs.existsSync(imagePath)) {
       return res.status(404).send('Image not found');
     }
 
-    const imagePath = path.join(__dirname, '../public', photo.url);
+    // Read the image file and extract metadata
     const imageBuffer = fs.readFileSync(imagePath);
     const tags = exifreader.load(imageBuffer);
 
@@ -133,13 +122,23 @@ router.get('/gallery/:imageName', async (req, res) => {
       formattedDate = datePart.replace(/:/g, '/'); // Replace ':' with '/'
     }
 
+    // Extract tags
+    const tagArray = tags['XPKeywords']?.description
+      ? tags['XPKeywords'].description.split(';').map(tag => tag.trim().toLowerCase())
+      : [];
+
+    // Prepare metadata
     const metadata = {
       date: formattedDate,
       camera: tags['Model'] ? tags['Model'].description : 'Unknown',
       orientation: tags['Orientation'] ? tags['Orientation'].description : 'Unknown',
     };
 
-    res.render('image', { photo: photo, metadata: metadata });
+    // Render the image page with metadata and tags
+    res.render('image', {
+      photo: { url: `/images/photos/${imageName}`, tags: tagArray },
+      metadata: metadata,
+    });
   } catch (err) {
     console.error("Error in /gallery/:imageName route:", err);
     res.status(500).send("Error loading image");

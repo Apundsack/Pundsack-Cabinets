@@ -55,6 +55,15 @@
           <div class="metadata">
             <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
             <p><strong>Tags:</strong> <%= photo.tags.length > 0 ? photo.tags.join(', ') : 'No tags available' %></p>
+            <% if (photo.tags.includes('stained')) { %>
+              <button onclick="window.location.href='/about/stain'">Learn About Stain</button>
+            <% } %>
+            <% if (photo.tags.includes('painted')) { %>
+              <button onclick="window.location.href='/about/paint'">Learn About Paint</button>
+            <% } %>
+            <% if (photo.tags.includes('custom')) { %>
+              <button onclick="window.location.href='/about/custom'">Learn About Custom Work</button>
+            <% } %>
           </div>
         </div>
       </td>
