@@ -125,8 +125,16 @@ router.get('/gallery/:imageName', async (req, res) => {
     const imageBuffer = fs.readFileSync(imagePath);
     const tags = exifreader.load(imageBuffer);
 
+    // Extract and reformat the date
+    let rawDate = tags['DateTime'] ? tags['DateTime'].description : 'Unknown';
+    let formattedDate = 'Unknown';
+    if (rawDate !== 'Unknown') {
+      const [datePart] = rawDate.split(' '); // Split into date and time
+      formattedDate = datePart.replace(/:/g, '/'); // Replace ':' with '/'
+    }
+
     const metadata = {
-      date: tags['DateTime'] ? tags['DateTime'].description : 'Unknown',
+      date: formattedDate,
       camera: tags['Model'] ? tags['Model'].description : 'Unknown',
       orientation: tags['Orientation'] ? tags['Orientation'].description : 'Unknown',
     };
