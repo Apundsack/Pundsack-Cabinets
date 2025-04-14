@@ -203,9 +203,9 @@ body.fade-out {
 }
 
 .hero{
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 100%;
 }
 
 
