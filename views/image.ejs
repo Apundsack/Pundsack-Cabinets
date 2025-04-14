@@ -49,29 +49,14 @@
         </td>
         <td>
         <div class="metadata">
-          <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
+          <div class="metadata">
+            <p><strong>Photo Taken On:</strong> <%= metadata.date %></p>
+            <p><strong>Tags:</strong> <%= photo.tags.length > 0 ? photo.tags.join(', ') : 'No tags available' %></p>
+          </div>
         </div>
       </td>
     </tr>
       </table>
-      <div class="cardContainer">
-        <a href="/about"><div class="card">
-          <h2>About Us</h2>
-          <p>We are a family business with a passion for creating custom cabinetry.</p>
-        </div></a>
-        <a href="/gallery"><div class="card">
-          <h2>Gallery</h2>
-          <p>Explore our collection of unique, custom-designed cabinets.</p>
-        </div>
-      </a>
-      <a href="/contact">
-        <div class="card">
-          <h2>Contact Us</h2>
-          <p>Have questions? We’d love to hear from you.</p>
-        </div>
-      </a>
-        </div>
-    </div>
   </main>
   <%- include('partials/footer') %>
 </body>

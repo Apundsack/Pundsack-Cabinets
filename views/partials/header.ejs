@@ -55,15 +55,19 @@
       width: 20%;
       height: 10%;
     }   
-    /* .radialMenu {
+    .radialMenu {
+      top: -15px !important;
       right: 50px !important;
-    } */
+    }
      .menuOption{
-      height: 9vh !important;
+      height: 8vh !important;
      }
     .menuOption a {
       font-size: 0.75rem !important;
     }
+    .option1:hover, .option2:hover, .option3:hover, .option4:hover {
+  transform:translateY(1vh) !important;
+}
     /* .menuOption {
       width: 50vw !important;  
       height: 8vh !important;  
@@ -180,24 +184,9 @@
   transition: transform 0.3s ease-out;
 }
 
-.option1:hover {
+.option1:hover, .option2:hover, .option3:hover, .option4:hover {
   transform-origin: left center;
   transform:translateY(3vh);
-}
-
-.option2:hover {
-  transform-origin: left center;
-  transform: translateY(3vh);
-}
-
-.option3:hover {
-  transform-origin: left center;
-  transform: translateY(3vh);
-}
-
-.option4:hover {
-  transform-origin: left center;
-  transform: translateY(3vh);
 }
 
 .menuOption a {

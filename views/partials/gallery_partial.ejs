@@ -1,19 +1,16 @@
 <div class="gallery">
-    
   <% photos.forEach(photo => { %>
     <% 
-    // Use a regular expression to extract the number from the filename
-    const match = photo.url.match(/img_(\d+)\.avif/);
-    const imageId = match ? match[1] : '';  // Extract the number or use an empty string if not matched
-  %>
-
-    <div class="heart-icon gallery-item <%= photo.width > photo.height ? 'landscape' : 'portrait' %>" onclick="toggleHeart(this)" data-id="<%= imageId %>">
-        <a href="/gallery/<%= path.basename(photo.url) %>">
-            <img src="<%= photo.url %>" alt="<%= photo.url %>" loading="lazy">
-        </a>    
-        &#9825;
-    </div>
-    
-<% }) %>
-
+    const tagClasses = photo.tags.map(tag => tag.toLowerCase()).join(' ');
+    %>
+    <div class="heart-icon gallery-item <%= tagClasses %> <%= photo.width > photo.height ? 'landscape' : 'portrait' %>" 
+      onclick="toggleHeart(this)" 
+      data-id="<%= photo.url.match(/img_(\d+)\.avif/)?.[1] || '' %>" 
+      data-tags="<%= Array.isArray(photo.tags) ? photo.tags.map(t => t.trim().toLowerCase()).join(',') : '' %>">
+   <a href="/gallery/<%= path.basename(photo.url) %>">
+     <img src="<%= photo.url %>" alt="<%= photo.url %>" loading="lazy">
+   </a>    
+   &#9825;
+ </div>
+  <% }) %>
 </div>

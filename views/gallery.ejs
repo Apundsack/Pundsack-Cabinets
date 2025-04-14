@@ -19,7 +19,7 @@
 
 @media (max-width: 767px) { 
     .gallery {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr) !important;
     }
     .gallery-item{
       padding-bottom: 20px;
@@ -79,6 +79,10 @@
     color: red;
     transform: translateY(-15px);
   }
+
+  .filter-btn {
+    margin: 5px;
+  }
 </style>
 
 <script>
@@ -115,7 +119,29 @@
   // Load heart states when the page loads
   window.onload = loadHeartStates;
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.gallery-item');
+  
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category.toLowerCase();
+  
+        items.forEach(item => {
+          const tags = item.dataset.tags?.toLowerCase().split(',').map(tag => tag.trim()) || [];
 
+  
+          if (category === 'all' || tags.includes(category)) {
+            item.style.display = ''; // Show the item
+          } else {
+            item.style.display = 'none'; // Hide the item
+          }
+        });
+      });
+    });
+  });
+  </script>
 </head>
 <body>
   <%- include('partials/header') %>
@@ -124,6 +150,13 @@
     <p style="color: white;">Heart your favorite cabinets to show us what you love when you contact us.</p>
   </div>
     <div class="content" style="min-height: 400vh;">
+      <div id="category-buttons" style="padding-bottom:20px;">
+        <% ["Painted", "Stained", "Dark", "Light", "Commercial", "Residential"].forEach(category => { %>
+          <button class="filter-btn" data-category="<%= category.toLowerCase() %>"><%= category %></button>
+        <% }) %>
+        <button class="filter-btn" data-category="all">Show All</button>
+      </div>
+      
       <%- include('partials/gallery_partial', { photos: photos }) %>
     </div>
   <%- include('partials/footer') %>
