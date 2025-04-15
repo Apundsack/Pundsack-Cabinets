@@ -1,67 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    .hero{
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),#D7DAE5, #D7DAE5), 
-      url(/images/imagery/DSC_0076.JPG);
-    }
-    .content{
-      padding-left: 50px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stains</title>
+    <meta name="description" content="Explore our range of stains to customize your cabinets. Choose from a variety of colors and finishes to match your style.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .hero{
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),#D7DAE5, #D7DAE5),
+            url(/images/imagery/DSC_0076.JPG);
+        }
+        .content{
+            padding-left: 50px;
+        }
+        .text-image-container {
+            display: flex; /* For side-by-side on larger screens */
+            align-items: flex-start; /* Align items to the top */
+            width: 100%; /* Ensure container takes full width */
+        }
+        .text-column {
+            width: 60%;
+            padding-right: 20px; /* Add some spacing between text and images */
+        }
+        .image-column {
+            width: 40%;
+            display: flex; /* For side-by-side images */
+            gap: 10px; /* Space between images */
+            justify-content: center; /* Center images horizontally */
+            align-items: center; /* Center images vertically (optional) */
+        }
+        .image-column img {
+            width: 45%; /* Adjust image width within the container */
+            max-width: 150px; /* Optional: set a maximum width for the images */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Media query for mobile devices (adjust max-width as needed) */
+        @media (max-width: 768px) {
+            .text-image-container {
+                flex-direction: column; /* Stack items vertically */
+            }
+            .text-column {
+                width: 100%;
+                padding-right: 0; /* Remove right padding on mobile */
+                margin-bottom: 20px; /* Add spacing below text */
+            }
+            .image-column {
+                width: 100%;
+                flex-direction: row; /* Keep images in a row on very small screens */
+                justify-content: space-around; /* Distribute space around images */
+                margin-bottom: 20px; /* Add spacing below images */
+            }
+            .image-column img {
+                width: 45%; /* Maintain image width */
+                max-width: none; /* Remove max-width on mobile */
+            }
+            .content {
+                padding-left: 20px; /* Adjust padding for mobile */
+                padding-right: 20px; /* Add right padding for mobile */
+            }
+            .content table {
+                display: block; /* Make the table behave like a block */
+            }
+            .content tr {
+                display: block; /* Make table rows behave like blocks */
+            }
+            .content td {
+                display: block; /* Make table data cells behave like blocks */
+                width: 100%; /* Take full width */
+                text-align: left; /* Align text to the left on mobile */
+            }
+            .content td:last-child {
+                /* The image container is now a direct child of .content */
+                text-align: center; /* Center the image container */
+            }
+        }
+    </style>
 </head>
 <body class="hero">
-  <%- include('partials/header') %>
-  <div class="highlight">
-    <h1>Stain</h1>
-  </div>
-    <div class="content">
-      <table style="width: 100%;">
-        <tr>
-          <!-- Text on the left -->
-          <td style="width: 60%; vertical-align: top; text-align: left;">
-            <h2>Finding the Right Stain for Your Custom Cabinets</h2>
-            <p>
-              One of the most exciting parts of designing custom cabinets is choosing the finish that brings the wood to life. Stain enhances the natural grain, adds depth, and helps you create the perfect mood for your space—whether you want something warm and inviting, rich and bold, or light and airy.
-            </p>
-      
-            <h3>A Full Spectrum of Options</h3>
-            <p>
-              We offer a wide range of stain colors, from timeless classics to custom blends mixed specifically for your project. Whether you’re aiming for a natural wood tone, a deep espresso, or something in between, we’ll help you find a finish that fits your vision.
-            </p>
-            <p>
-              Prefer something unique? We can match an existing piece or create a custom tint to complement other elements in your home. Our stains can highlight the details in the grain, soften contrast, or create a smooth, consistent look—whatever suits your style.
-            </p>
-      
-            <h3>Love the Look of Bare Wood?</h3>
-            <p>
-              Some of the most beautiful finishes are the simplest. A natural finish—with no added stain—lets the wood speak for itself. This option highlights the grain and color of the material, offering a clean, organic feel that works in any room.
-            </p>
-      
-            <h3>Your Cabinets, Your Style</h3>
-            <p>
-              No matter your vision, we’ll help you create a look that’s personal and polished. Stains are just one more way to make your cabinets truly yours.
-            </p>
-          </td>
-      
-          <!-- Images side-by-side on the right -->
-          <td style="width: 40%; vertical-align: center; text-align: center;">
-            <div style="display: flex; gap: 10px; justify-content: center;">
-              <img src="/images/imagery/IMG_1378.JPG" alt="Stain color sample 1" style="width:45%;">
-              <img src="/images/imagery/IMG_1451.JPG" alt="Stain color sample 2" style="width:45%;">
-            </div>
-          </td>
-        </tr>
-      </table>
-      
-      
-      
+    <%- include('partials/header') %>
+    <div class="highlight">
+        <h1>Stain</h1>
     </div>
-  <%- include('partials/footer') %>
+    <div class="content">
+        <div class="text-image-container">
+            <div class="text-column">
+                <h2>Finding the Right Stain for Your Custom Cabinets</h2>
+                <p>
+                    One of the most exciting parts of designing custom cabinets is choosing the finish that brings the wood to life. Stain enhances the natural grain, adds depth, and helps you create the perfect mood for your space—whether you want something warm and inviting, rich and bold, or light and airy.
+                </p>
+
+                <h3>A Full Spectrum of Options</h3>
+                <p>
+                    We offer a wide range of stain colors, from timeless classics to custom blends mixed specifically for your project. Whether you’re aiming for a natural wood tone, a deep espresso, or something in between, we’ll help you find a finish that fits your vision.
+                </p>
+                <p>
+                    Prefer something unique? We can match an existing piece or create a custom tint to complement other elements in your home. Our stains can highlight the details in the grain, soften contrast, or create a smooth, consistent look—whatever suits your style.
+                </p>
+
+                <h3>Love the Look of Bare Wood?</h3>
+                <p>
+                    Some of the most beautiful finishes are the simplest. A natural finish—with no added stain—lets the wood speak for itself. This option highlights the grain and color of the material, offering a clean, organic feel that works in any room.
+                </p>
+
+                <h3>Your Cabinets, Your Style</h3>
+                <p>
+                    No matter your vision, we’ll help you create a look that’s personal and polished. Stains are just one more way to make your cabinets truly yours.
+                </p>
+            </div>
+            <div class="image-column">
+                <img src="/images/imagery/IMG_1378.JPG" alt="Stain color sample 1">
+                <img src="/images/imagery/IMG_1451.JPG" alt="Stain color sample 2">
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
 </body>
 </html>

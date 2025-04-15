@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us</title>
-  <link rel="stylesheet" href="/css/styles.css">
-  <style>
-    .hero{
-      background-image: url(/images/imagery/DSC_0081.JPG);
-    }
-    .content{
-      padding-left: 50px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paints</title>
+    <meta name="description" content="Learn more about our painted cabinets, and the range of colors available.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .hero{
+            background-image: url(/images/imagery/DSC_0081.JPG);
+        }
+        .content{
+            padding-left: 50px;
+        }
+        .text-image-container {
+            display: flex; /* For side-by-side on larger screens */
+            align-items: flex-start; /* Align items to the top */
+        }
+        .text-column {
+            width: 60%;
+            padding-right: 20px; /* Add some spacing between text and image */
+        }
+        .image-column {
+            width: 40%;
+            text-align: center;
+        }
+
+        /* Media query for mobile devices (adjust max-width as needed) */
+        @media (max-width: 768px) {
+            .text-image-container {
+                flex-direction: column; /* Stack items vertically */
+            }
+            .text-column {
+                width: 100%;
+                padding-right: 0; /* Remove right padding on mobile */
+                margin-bottom: 20px; /* Add spacing below text */
+            }
+            .image-column {
+                width: 100%;
+            }
+            .content {
+                padding-left: 20px; /* Adjust padding for mobile */
+                padding-right: 20px; /* Add right padding for mobile */
+            }
+            .content table {
+                display: block; /* Make the table behave like a block */
+            }
+            .content tr {
+                display: block; /* Make table rows behave like blocks */
+            }
+            .content td {
+                display: block; /* Make table data cells behave like blocks */
+                width: 100%; /* Take full width */
+                text-align: left; /* Align text to the left on mobile */
+            }
+            .content td:last-child {
+                text-align: center; /* Center the image in the second (image) 'td' */
+            }
+            .content td img {
+                width: 80%; /* Adjust image width for mobile */
+                max-width: 300px; /* Optional: set a maximum width for the image */
+            }
+        }
+    </style>
 </head>
 <body class="hero">
-  <%- include('partials/header') %>
-  <div class="highlight">
-    <h1>Paint</h1>
-  </div>
+    <%- include('partials/header') %>
+    <div class="highlight">
+        <h1>Paint</h1>
+    </div>
     <div class="content">
-      <table>
-        <tr>
-          <td style="width: 60%; vertical-align: top; text-align: left;">
-            <h2>Painted Cabinets</h2>
-            <p>
-              Painted cabinets offer a lot of flexibility in design. You can choose any color to match your style or needs, whether you want a classic look or something more unique. Custom-painted cabinets give you the freedom to create a look that works best for your project.
-            </p>
-            <p>
-              We can match any color from popular fan decks or color indexes to make sure your cabinets are the exact shade you're looking for.
-            </p>
-      
-            <h3>A Range of Color Choices</h3>
-            <p>
-              With painted cabinets, the options are nearly endless. You can choose a color that fits your vision, whether it's something simple or bold. If you need a specific color to match other elements in your space, we can do that too.
-            </p>
-      
-            <h3>Durability and Finish</h3>
-            <p>
-              Our painted finishes are smooth and even, providing a lasting look that’s easy to maintain. These cabinets are built to stand up to everyday use while still looking good over time.
-            </p>
-      
-            <h3>Your Cabinets, Your Color</h3>
-            <p>
-              With painted cabinets, the choice is entirely up to you. Whether you're looking for a classic or a custom color, we’ll help you achieve the perfect look.
-            </p>
-          </td>
-          <td style="width: 40%; vertical-align: top; text-align: center;">
-            <img src="/images/imagery/IMG_1737.jpg" alt="Painted cabinet samples" style="width:60%;">
-          </td>
-        </tr>
-      </table>
-  <%- include('partials/footer') %>
+        <div class="text-image-container">
+            <div class="text-column">
+                <h2>Painted Cabinets</h2>
+                <p>
+                    Painted cabinets offer a lot of flexibility in design. You can choose any color to match your style or needs, whether you want a classic look or something more unique. Custom-painted cabinets give you the freedom to create a look that works best for your project.
+                </p>
+                <p>
+                    We can match any color from popular fan decks or color indexes to make sure your cabinets are the exact shade you're looking for.
+                </p>
+
+                <h3>A Range of Color Choices</h3>
+                <p>
+                    With painted cabinets, the options are nearly endless. You can choose a color that fits your vision, whether it's something simple or bold. If you need a specific color to match other elements in your space, we can do that too.
+                </p>
+
+                <h3>Durability and Finish</h3>
+                <p>
+                    Our painted finishes are smooth and even, providing a lasting look that’s easy to maintain. These cabinets are built to stand up to everyday use while still looking good over time.
+                </p>
+
+                <h3>Your Cabinets, Your Color</h3>
+                <p>
+                    With painted cabinets, the choice is entirely up to you. Whether you're looking for a classic or a custom color, we’ll help you achieve the perfect look.
+                </p>
+            </div>
+            <div class="image-column">
+                <img src="/images/imagery/IMG_1737.jpg" alt="Painted cabinet samples" style="width:60%;">
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
 </body>
 </html>
