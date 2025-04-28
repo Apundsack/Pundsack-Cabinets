@@ -2,13 +2,13 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const galleryRoutes = require('./routes/gallery');
-const contactRoutes = require('./routes/contact'); // Import contact routes
-const aboutRoutes = require('./routes/about'); // Import about routes
-const bodyParser = require('body-parser'); // Import body-parser
+const contactRoutes = require('./routes/contact');
+const aboutRoutes = require('./routes/about');
+const bodyParser = require('body-parser');
 const indexRoutes = require('./routes/index');
 const app = express();
 const port = process.env.PORT || 3000;
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
@@ -20,29 +20,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Register galleryRoutes before dynamically loading other routes
-app.use(galleryRoutes); // Ensure gallery routes are first
-
-// Register contact routes
-app.use(contactRoutes); // Add contact routes
-
-// Register about routes
+// Register routes
+app.use(galleryRoutes);
+app.use(contactRoutes);
 app.use('/about', aboutRoutes);
+app.use(indexRoutes);
 
-// Register index routes
-app.use(indexRoutes); // Add index routes
-
-// Dynamically load all other routes (if needed)
+// Dynamically load other routes
 const routesPath = path.join(__dirname, 'routes');
 fs.readdirSync(routesPath).forEach(file => {
-  if (file !== 'gallery.js' && file !== 'contact.js' && file !== 'about.js') { // Avoid loading gallery.js, contact.js, and about.js again
+  if (file !== 'gallery.js' && file !== 'contact.js' && file !== 'about.js') {
     const route = require(path.join(routesPath, file));
     app.use('/', route);
   }
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
-
+// Export the app object
 module.exports = app;
+
+// Only start the server if this file is being run directly
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
