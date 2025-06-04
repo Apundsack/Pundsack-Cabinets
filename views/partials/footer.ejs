@@ -1,44 +1,227 @@
 <style>
-    
+  /* Root variables for consistent theming - These should ideally be defined once at the very top of your global CSS */
+  /* If these are already globally defined, you don't need to repeat them here. */
+  /* For demonstration, I'm including them as they were in your global style snippet. */
+  /* :root {
+    --h1: #000000;
+    --dark: #222222;
+    --yellow: #D7B418;
+    --red: #9D2719;
+    --text-color: #222222;
+    --background-color: #D7DAE5;
+    --grey: #D7DAE5;
+    --white: #ffffff;
+  } */
+
   footer {
-  background-color: var(--white);
-  width: auto;
-  position: relative;
-  height: 100px;
-  padding: 25px;
-  border-radius: 0px 25px 0 0;
-  margin:0 40px 0 -1px;
-  z-index: 100; /* Ensure the footer is on top */
-}
+    background-color: var(--white);
+    padding: 2.5em 4em 1.5em 4em; /* Adjusted padding for better visual balance */
+    border-radius: 0 25px 0 0;
+    margin: 0 40px 0 -1px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center content horizontally */
+    font-family: 'futuramedium', sans-serif; /* Aligned with global font definitions */
+    font-size: 1.1rem; /* Slightly reduced base font size for better readability, but still prominent */
+    position: relative;
+    height: auto;
+    color: var(--text-color); /* Uses global --text-color */
+  }
 
-footer:before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  height: 40px;
-  width: 40px;
-  background: transparent;
-  border-bottom-left-radius: 50%;
-  box-shadow: 0 20px 0 0 var(--white);
-  z-index: -1; /* This places the pseudo-element behind the footer */
-}
+  footer:before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: 0;
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    border-bottom-left-radius: 50%;
+    box-shadow: 0 20px 0 0 var(--white);
+    z-index: -1;
+  }
 
+  .footer-content-wrapper {
+    display: flex;
+    justify-content: space-evenly; /* Space out logo/info and contact sections */
+    align-items: center;
+    width: 100%; /* Take full width */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 2em; /* Gap between major sections */
+  }
 
+  .footer-logo img {
+    height: 100px; /* Slightly reduced logo height for better integration */
+    width: auto; /* Maintain aspect ratio */
+  }
+
+  .footer-section {
+    display: flex;
+    align-items: center;
+    gap: 2em; /* Consistent gap for elements within sections */
+    flex-wrap: wrap; /* Allow items within sections to wrap */
+  }
+
+  .footer-info,
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.5; /* Improve readability of text blocks */
+  }
+
+  .footer-info strong {
+    font-family: 'futura_xblk_btextra_black', sans-serif; /* Use your extra black font for strong emphasis */
+    font-size: 1.2em; /* Make company name stand out */
+    margin-bottom: 0.25em; /* Small space below company name */
+    color: var(--dark); /* Using dark for strong text */
+  }
+
+  .footer-contact a {
+    color: var(--text-color); /* Consistent text color for links */
+    text-decoration: none; /* Remove default underline */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+  }
+
+  .footer-contact a:hover {
+    color: var(--red); /* Use your yellow accent color on hover */
+    text-decoration: underline; /* Add underline on hover */
+  }
+
+  .footer-divider {
+    width: 5px;
+    height: 100px; /* Aligned with logo height */
+    background-color: var(--yellow); /* Uses global --yellow */
+    flex-shrink: 0; /* Prevent shrinking on small screens */
+  }
+
+  .footer-navigation {
+    width: 100%;
+    margin-top: 2em; /* Space above navigation */
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Subtle separator, using transparent black */
+    padding-top: 1.5em; /* Padding above links */
+    text-align: center; /* Center the navigation links */
+  }
+
+  .footer-navigation ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center links */
+    gap: 2em; /* Space between links */
+    flex-wrap: wrap; /* Allow navigation items to wrap */
+  }
+
+  .footer-navigation ul li a {
+    font-family: 'futuramedium', sans-serif; /* Consistent font for navigation */
+    color: var(--text-color); /* Uses global --text-color */
+    text-decoration: none;
+    font-weight: bold; /* Make navigation links stand out */
+    padding: 0.5em 1em; /* Add some clickable area */
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .footer-navigation ul li a:hover {
+    color: var(--red); /* Use your yellow accent color on hover */
+    background-color: rgba(0, 0, 0, 0.05); /* Subtle hover background */
+    border-radius: 5px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    footer {
+      margin: 0 20px 0 -1px; /* Adjust margin for slightly smaller screens */
+      padding: 2em 3em 1em 3em;
+    }
+
+    .footer-content-wrapper {
+      flex-direction: column; /* Stack logo/info and contact vertically */
+      align-items: flex-start; /* Align left */
+      gap: 1.5em;
+    }
+
+    .footer-section {
+      flex-direction: column; /* Stack items within sections vertically */
+      align-items: flex-start;
+      gap: 1em;
+    }
+
+    .footer-divider {
+      display: none; /* Hide divider on smaller screens */
+    }
+
+    .footer-navigation ul {
+      flex-direction: column; /* Stack navigation links vertically */
+      gap: 0.75em;
+      align-items: flex-start; /* Align navigation links to the left */
+    }
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      padding: 1.5em 2em 0.75em 2em;
+      font-size: 1rem; /* Further reduce font size */
+      margin: 0; /* Remove side margins for full width */
+      border-radius: 0; /* Remove border-radius if it clashes with full width */
+    }
+
+    footer:before {
+      display: none; /* Hide the corner design on small screens */
+    }
+
+    .footer-logo img {
+      height: 70px; /* Adjust logo for smaller screens */
+    }
+
+    .footer-navigation {
+      margin-top: 1.5em;
+      padding-top: 1em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    footer {
+      padding: 1em 1.5em 0.5em 1.5em;
+      font-size: 0.9rem;
+    }
+
+    .footer-logo img {
+      height: 50px;
+    }
+  }
 </style>
 
-
-<div id="transition-overlay"></div>
 <footer>
-  <p>Pundsack Cabinets LLC</p>
-  <table>
-    <tr>
-      <td><a href="/">Home</a></td>
-      <td><a href="/about">About Us</a></td>
-      <td><a href="/contact">Contact Us</a></td>
-      <td><a href="/gallery">Gallery</a></td>
-    </tr>
-  </table>
-    
+  <div class="footer-content-wrapper">
+    <div class="footer-section">
+      <div class="footer-logo">
+        <img src="/images/imagery/Logo.png" alt="Pundsack Cabinets Logo">
+      </div>
+      <div class="footer-info">
+        <strong>Pundsack Cabinets LLC</strong>
+        <span>22545 Co Rd 42</span>
+        <span>Richmond, MN 56368</span>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-section">
+      <div class="footer-contact">
+        <span>Custom Cabinets in Stearns County, Minnesota</span><br />
+        <a href="https://www.facebook.com/pundsackcabinets/" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="footer-navigation">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+  </nav>
 </footer>
-  
