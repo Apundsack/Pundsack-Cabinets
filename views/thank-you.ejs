@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>   
+  <title>About Us</title>
+  <meta name="description" content="Thank you for contacting Pundsack Cabinets.">
+  <style>
+    .hero {
+      background-image: 
+  linear-gradient(to bottom, rgba(0, 0, 0, 0),#D7DAE5,#D7DAE5, #D7DAE5), 
+  url(/images/imagery/DSC_0081.JPG);
+  
+    }
+
+    .section-title {
+      font-size: 2em;
+      margin-top: 20px;
+    }
+
+    .bio img, .owner img {
+      width: 50%;
+      height: auto;
+      /* margin-top: 20px;
+      margin-bottom: 20px; */
+    }
+
+    .bio, .owner, .custom-work, .wood-types, .stain-colors {
+      padding: 0 8vw 0 8vw; 
+    }
+
+    .bio, .owner {
+      border-radius: 25px 0 0 25px;
+    }
+
+    /* Flexbox for desktop view (left-right) */
+    .section {
+      display: flex;
+      align-items: center; /* Vertically center content */
+      justify-content: space-between; /* Space out title and content */
+      margin-bottom: 40px;
+    }
+
+    .section .text {
+      flex: 1;
+      padding-right: 20px; /* Add some space between text and image */
+    }
+
+    .section img {
+      flex: 0 0 40%; /* Image takes up 40% of the width */
+      max-width: 100%; /* Ensure image scales properly */
+    }
+    .customImg {
+  display: flex; /* Use Flexbox for layout */
+  justify-content: space-between; /* Add space between the images */
+  align-items: center; /* Vertically align the images */
+  gap: 10px; /* Add spacing between images */
+  padding-bottom:40px;
+}
+
+.customImg img {
+  flex: 1; /* Allow images to grow and shrink equally */
+  max-width: 25%; /* Ensure each image takes up a maximum of 30% of the container */
+  max-height: auto; /* Maintain aspect ratio */
+}
+
+    /* Mobile view (title, image, text stacked vertically) */
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center content */
+        text-align: center; /* Center text */
+      }
+
+      .section img {
+        width: 80%; /* Image takes up 80% width on mobile */
+        margin-top: 20px;
+      }
+
+      .section .text {
+        padding-right: 0; /* Remove extra padding on smaller screens */
+      }
+    }
+  </style>
+</head>
+<body class="hero">
+  <%- include('partials/header') %>
+  
+  <div class="highlight">
+    <h1>Thank You</h1>
+  </div>
+
+  <div class="content" style="text-align:center;">
+    <h2>Thank you for your message!</h2>
+    <p>We have received your submission and will get back to you as soon as possible.</p>
+    <a href="/">Go back to the homepage</a>
+    </div>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

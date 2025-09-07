@@ -4,6 +4,7 @@ const fs = require('fs');
 const galleryRoutes = require('./routes/gallery');
 const contactRoutes = require('./routes/contact');
 const aboutRoutes = require('./routes/about');
+const thankRoutes = require('./routes/thank');
 const bodyParser = require('body-parser');
 const indexRoutes = require('./routes/index');
 const app = express();
@@ -27,7 +28,7 @@ app.use(galleryRoutes);
 app.use(contactRoutes);
 app.use('/about', aboutRoutes);
 app.use(indexRoutes);
-
+app.use('/thank-you', thankRoutes);
 // Dynamically load other routes
 const routesPath = path.join(__dirname, 'routes');
 fs.readdirSync(routesPath).forEach(file => {

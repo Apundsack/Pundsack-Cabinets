@@ -37,7 +37,9 @@ router.post('/contact', async (req, res) => {
         console.error('reCAPTCHA error:', error);
         return res.status(500).send('reCAPTCHA verification failed.');
     }
-
+    router.get('/thank-you', (req, res) => {
+        res.render('thank-you');
+    });
     // Input sanitization
     const cleanName = validator.escape(name);
     const cleanEmail = validator.escape(email);
@@ -75,7 +77,7 @@ router.post('/contact', async (req, res) => {
             }
         }
         console.log('Email sent:', info.response);
-        res.send('Thank you for your message!');
+        res.redirect('/thank-you');
     });
 });
 
