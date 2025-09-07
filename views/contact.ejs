@@ -71,18 +71,33 @@
         <h1>Contact Us</h1>
     </div>
     <div class="content">
-        <div style="margin: auto;width: 300px;text-align: center;">
+        <div style="margin: auto;max-width: 1500px;text-align: center;">
             <h2>Contact Form</h2>
             <p>Please fill out the form below to contact us.</p>
+
+                    
         <form id="contactForm" action="/contact" method="POST">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" required><br><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br><br>
-
-            <label for="message">Message:</label><br>
-            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+            
+            <div class="row">
+            <div class="col-6">
+                <div>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" required>
+                </div>
+            </div>
+            <div class="col-6">
+                <div>
+                    <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            <div>
+                <div class="col-12">
+                    <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+            </div>
+        </div>
 
             <input type="hidden" id="toggledHeartIds" name="toggledHeartIds">
             <input type="hidden" name="honeypot" style="display:none;">

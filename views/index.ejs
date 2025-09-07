@@ -8,11 +8,10 @@
   <link rel="preload" href="/images/imagery/home.mp4" as="video" type="video/mp4">
   <style>
     .after{
-      margin:100px 0 250px 0;
+      margin:0 0 150px 0;
       padding: 20px 20px 20px 20px;
       width: 100%;
       height: auto;
-      min-height: 40vh;
       background-color: var(--white);
       z-index: 1;
       position: relative;
@@ -48,145 +47,34 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
-  .testimonial-carousel {
-  margin: 40px auto;
-  padding: 20px;
-  max-width: 80%;
-  text-align: center;
-}
-
-.testimonial-carousel h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.carousel-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.carousel {
-  display: flex;
-  transition: transform 0.3s ease-in-out;
-}
-
-.carousel-item {
-  min-width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  .testimonial-carousel .carousel-item p {
+  width: 80vw;
+  margin: 0 auto;
   font-size: 1.2em;
   text-align: center;
   color: #333;
+  padding: 0 8%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.carousel-indicators [data-bs-target]{
+  background-color: var(--yellow);
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+  background-color: var(--yellow);
+  width: 5%;
+}
+
+.testimonial-carousel .carousel-item {
   background-color: #f4f4f4;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-.carousel-controls {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  z-index: 1;
-}
-
-.carousel-controls button {
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 1.5em;
-}
-
-.carousel-controls button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.carousel-indicators {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.carousel-indicators span {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #ccc;
-  cursor: pointer;
-}
-
-.carousel-indicators .active {
-  background-color: #333;
-}
-
-.carousel-item p {
-  width: 50vw;
-  margin: 0 auto;
-}
-
-
-
-
   </style>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    let currentIndex = 0;
-    const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
-    const carousel = document.querySelector('.carousel');
-    const indicatorsContainer = document.querySelector('.carousel-indicators');
-
-    for (let i = 0; i < totalItems; i++) {
-      const indicator = document.createElement('span');
-      indicator.addEventListener('click', () => setCurrentIndex(i));
-      indicatorsContainer.appendChild(indicator);
-    }
-
-    function updateIndicators() {
-      const indicators = document.querySelectorAll('.carousel-indicators span');
-      indicators.forEach((indicator, index) => {
-        if (index === currentIndex) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
-        }
-      });
-    }
-
-    function updateCarousel() {
-      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
-      updateIndicators();
-    }
-
-    function showNextItem() {
-      currentIndex = (currentIndex + 1) % totalItems;
-      updateCarousel();
-    }
-    function showPrevItem() {
-      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-      updateCarousel();
-    }
-
-    function setCurrentIndex(index) {
-      currentIndex = index;
-      updateCarousel();
-    }
-
-    document.querySelector('.next').addEventListener('click', showNextItem);
-    document.querySelector('.prev').addEventListener('click', showPrevItem);
-
-    updateCarousel();
-  });
-</script>
 
 </head>
 <body>
@@ -227,55 +115,67 @@
   </main>
   <div class="after">
         <div style="background-color: white;position:relative;">
-          <div class="testimonial-carousel">
-            <h2>What Our Customers Say</h2>
-            <div class="carousel-container">
-              <div class="carousel">
-                <div class="carousel-item">
-                  <p>"Pictures don’t lie. Greg turned our 100-year-old ugly kitchen into our dream kitchen! See the before pictures and you decide if he’s the best or not."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Greg made me a cabinet for my kitchen. I absolutely love it. Awesome craftsmanship. Best purchase ever. Also made a cabinet for my son's bathroom. It is gorgeous."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"We've had Greg do a couple of projects through the years (custom child's gate, stair banister) and both turned out even better than I imagined! He does great work and pays close attention to details. Trustworthy and honest! We currently have two more projects in the works with him right now (custom built-in entry way and office desks/cabinets)!"</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Greg had now done 2 kitchens for me and just finished a whole house (almost) interior trim job plus door installation. Meticulous work plus a great attitude and sense of humor."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Greg did a great job on kitchen and bathroom cabinets for my cabin. Very knowledgeable, easy to deal with."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Our shoe shelf. Custom made by Pundsack Cabinets. Our home is no longer overrun with footwear!"</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Thanks again for the fantastic work! Northland lumber is proud to say we work with Pundsack cabinets!"</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"I Have had the privilege of working with him building cabinets. He is very good at what he does if you get a job done by him it is nothing but the finest. He also has a good personality which makes him very easy to work with on the cabinets you want."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"If you're looking for someone who does amazing woodworking, check out Pundsack Cabinets! Awesome work and attention to details."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Credit goes to Pundsack Cabinets!!! Had to get them in for the brick work that comes next. But Greg does AMAZING work! Hands down would recommend him to everyone!"</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"We want to thank you for all your help with our project and the outstanding workmanship. We love the cabinets so much! Thank you again for all you did for us."</p>
-                </div>
-                <div class="carousel-item">
-                  <p>"Thank you, Greg! I love my new kitchen!"</p>
-                </div>
-              </div>
-              <div class="carousel-controls">
-                <button class="prev">❮</button>
-                <button class="next">❯</button>
-              </div>
-            </div>
-            <div class="carousel-indicators">
-            </div>
-          </div>
+            <h2 style="text-align: center";>What Our Customers Say</h2>
+          <div class="testimonial-carousel" style="justify-content:center;align-items: center;display: flex;">
+  <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+    
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+      <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
+    </div>
+
+    <!-- The carousel content/items -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <p>"Pictures don’t lie. Greg turned our 100-year-old ugly kitchen into our dream kitchen! See the before pictures and you decide if he’s the best or not."</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Greg made me a cabinet for my kitchen. I absolutely love it. Awesome craftsmanship. Best purchase ever. Also made a cabinet for my son's bathroom. It is gorgeous."</p>
+      </div>
+      <div class="carousel-item">
+        <p>"We've had Greg do a couple of projects through the years (custom child's gate, stair banister) and both turned out even better than I imagined! He does great work and pays close attention to details. Trustworthy and honest! We currently have two more projects in the works with him right now (custom built-in entry way and office desks/cabinets)!"</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Greg had now done 2 kitchens for me and just finished a whole house (almost) interior trim job plus door installation. Meticulous work plus a great attitude and sense of humor."</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Greg did a great job on kitchen and bathroom cabinets for my cabin. Very knowledgeable, easy to deal with."</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Our shoe shelf. Custom made by Pundsack Cabinets. Our home is no longer overrun with footwear!"</p>
+      </div>
+      <div class="carousel-item">
+        <p>"Thanks again for the fantastic work! Northland lumber is proud to say we work with Pundsack cabinets!"</p>
+      </div>
+      <div class="carousel-item">
+        <p>"I Have had the privilege of working with him building cabinets. He is very good at what he does if you get a job done by him it is nothing but the finest. He also has a good personality which makes him very easy to work with on the cabinets you want."</p>
+      </div>
+      <div class="carousel-item">
+        <p>"If you're looking for someone who does amazing woodworking, check out Pundsack Cabinets! Awesome work and attention to details."</p>
+      </div>
+    </div>
+
+    <!-- Previous and next controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+</div>
+
           
             </div>
           </div>
@@ -285,5 +185,7 @@
         </div>
   <%- include('partials/footer') %>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

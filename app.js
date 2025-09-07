@@ -17,6 +17,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap')));
+
 // Use body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
