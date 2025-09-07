@@ -1,30 +1,32 @@
-  @font-face {
-    font-family: 'futuralight';
-    src: url('./futura_light_bt-webfont.woff2') format('woff2'),
-         url('./futura_light_bt-webfont.woff') format('woff'),
-         url('./futura light bt.ttf') format('truetype'); /* added ttf for redundancy*/
-    font-weight: 300;
-    font-style: normal;
+@font-face {
+  font-family: 'Futura';
+  src: url('../fonts/futura_light_bt-webfont.woff2') format('woff2'),
+       url('../fonts/futura_light_bt-webfont.woff') format('woff'),
+       url('../fonts/futura light bt.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'futuramedium';
-    src: url('./futura_medium_bt-webfont.woff2') format('woff2'),
-         url('./futura_medium_bt-webfont.woff') format('woff'),
-         url('./futura medium bt.ttf') format('truetype'); /* added ttf for redundancy*/
-    font-weight: 500;
-    font-style: normal;
+  font-family: 'Futura';
+  src: url('../fonts/futura_medium_bt-webfont.woff2') format('woff2'),
+       url('../fonts/futura_medium_bt-webfont.woff') format('woff'),
+       url('../fonts/futura medium bt.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'futura_xblk_btextra_black';
-    src: url('./futura_xblk_bt-webfont.woff2') format('woff2'),
-         url('./futura_xblk_bt-webfont.woff') format('woff'),
-         url('./Futura XBlk BT.ttf') format('truetype'); /* added ttf for redundancy*/
-    font-weight: 900; /* Or 800 */
-    font-style: normal;
+  font-family: 'Futura';
+  src: url('../fonts/futura_xblk_bt-webfont.woff2') format('woff2'),
+       url('../fonts/futura_xblk_bt-webfont.woff') format('woff'),
+       url('../fonts/Futura XBlk BT.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
-
   :root {
       --h1: #fff;
       --dark: #222222;
@@ -45,7 +47,7 @@
       width: auto;
       color: var(--text-color);
       background-color: var(--background-color);
-      font-family: Futura, sans-serif;
+      font-family: 'Futura', Helvetica, Arial, sans-serif; 
       overflow-x: hidden;
       margin:0;
       opacity: 0;
@@ -61,15 +63,16 @@
 
     h1 {
       display: inline;
-      font-family: Futura XBlk BT, sans-serif;
+      font-family: 'Futura', Impact, Charcoal, sans-serif;
       font-size: 3rem;   
       width: auto;
       color: var(--white);
       mix-blend-mode: multiply;
+      font-weight: 900;
     }
 
     p {
-      font-family: Futura Medium BT, sans-serif;
+      font-family: 'Futura', Helvetica, Arial, sans-serif;
       font-size: 1.2rem;
       color: var(--dark);
     }
@@ -89,10 +92,9 @@
       color: var(--dark);
       border: none;
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 20px;
       cursor: pointer;
       border-radius: 5px;
-      font-weight: bold;
     }
 
     button:hover {

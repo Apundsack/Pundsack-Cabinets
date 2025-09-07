@@ -48,17 +48,22 @@
     z-index: 1;
   }
   .testimonial-carousel .carousel-item p {
-  width: 80vw;
+  width: 85vw;
   margin: 0 auto;
   font-size: 1.2em;
   text-align: center;
   color: #333;
-  padding: 0 8%;
+  padding: 0 10%;
   min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.testimonial-carousel .carousel-item.active {
+  padding-bottom: 50px;
+}
+
 .carousel-indicators [data-bs-target]{
   background-color: var(--yellow);
 }
@@ -67,6 +72,7 @@
 .carousel-control-next{
   background-color: var(--yellow);
   width: 5%;
+  min-width: 30px;
 }
 
 .testimonial-carousel .carousel-item {
