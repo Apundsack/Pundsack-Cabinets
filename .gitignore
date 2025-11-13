@@ -2,4 +2,6 @@ node_modules/
 .env
 *.log
 .DS_Store
-public/images/
+public/images/photos/
+public/images/imagery/home_og.mp4
+public/images/imagery/home.mp4
